@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { useEffect } from 'react';
 // import { useRouter } from 'next/compat/router';
 import Head from 'next/head';
-import AuthForm from '../components/AuthForm';
+import AuthForm from '../../components/AuthForm';
 
 const Login: NextPage = () => {
   // const router = useRouter();

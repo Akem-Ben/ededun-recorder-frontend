@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 // import { useRouter } from 'next/navigation';
 import Head from 'next/head';
-import PhrasesSection from '../components/PhrasesSection';
+import PhrasesSection from '../../components/PhrasesSection';
 
 const Phrases: NextPage = () => {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
