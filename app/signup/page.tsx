@@ -19,7 +19,7 @@ const Signup: NextPage = () => {
   // }, [router]);
 
   return (
-    <div>
+    <div className="min-h-screen">
       <Head>
         <title>Signup | Èdèdún APYP</title>
         <meta
@@ -29,14 +29,14 @@ const Signup: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex flex-col md:flex-row relative bg-white">
+      <div className="flex flex-col min-h-screen md:flex-row relative">
         {/* Left section - hidden on small screens */}
-        <div className="hidden md:block md:w-1/2 lg:w-1/2">
+        <div className="hidden md:block md:w-1/2 lg:w-1/2 pt-20">
           <AuthLeftPage />
         </div>
 
         {/* Right section - full width on small screens */}
-        <section className="w-full md:w-1/2 lg:w-1/2 flex justify-center py-24 lg:py-14 items-center px-4 sm:px-6 md:px-8">
+        <section className="w-full md:w-1/2 lg:w-1/2 flex justify-center items-center px-4 sm:px-6 md:px-8 py-20 min-h-screen">
           <div className="flex flex-col justify-center w-full max-w-md">
             {/* Logo for mobile only */}
             <div className="md:hidden flex flex-col justify-center mb-8">
@@ -62,12 +62,14 @@ const Signup: NextPage = () => {
       </div>
             </div>
 
-            <div className="flex flex-col gap-2 mb-6">
+            <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-bold">Create Your Account</h1>
               <div>
                 <p className="text-sm text-[#645D5D]">
                   Already have an account?{" "}
-                  <Link href="/login" className="text-[#eb512f]">
+                  <Link href="/login"
+                  style={{ textDecoration: "none", color: "#eb512f" }}
+                  >
                     Login
                   </Link>
                 </p>

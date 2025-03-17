@@ -28,6 +28,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   });
 
   const validateForm = () => {
+
+    if(!isLogin){
     if (!firstName) {
       setError({ ...error, firstNameError: true });
       return false;
@@ -48,6 +50,16 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
       setError({ ...error, passwordError: true });
       return false;
     }
+  }else if(isLogin){
+    if (!email) {
+      setError({ ...error, emailError: true });
+      return false;
+    }
+    if (!password) {
+      setError({ ...error, passwordError: true });
+      return false;
+    }
+  }
     return true;
   };
 
@@ -125,7 +137,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   //   };
 
   return (
-    <div className="w-full max-w-md mx-auto py-6 lg:py-12">
+    <div className="w-full max-w-md mx-auto py-4">
     <form className="space-y-4">
       {!isLogin && (
         <>
@@ -258,6 +270,30 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
           <div className="w-full flex flex-col gap-6">
             <div className="text-sm leading-[24px] flex justify-center items-center font-[500] text-[#60646C]">
               Or Register with
+            </div>
+          </div>
+        </div>
+      )}
+
+
+{isLogin && (
+        <div className="my-4 flex flex-col gap-4 justify-center items-center">
+          <div className="text-sm leading-[145%] font-[400] text-[#645D5D]">
+            Forgot Password?{" "}
+            <Link
+              href="/login"
+              style={{
+                textDecoration: "none",
+                color: "#eb512f",
+                fontWeight: "400",
+              }}
+            >
+              Recover
+            </Link>
+          </div>
+          <div className="w-full flex flex-col gap-6">
+            <div className="text-sm leading-[24px] flex justify-center items-center font-[500] text-[#60646C]">
+              Or Login with
             </div>
           </div>
         </div>
