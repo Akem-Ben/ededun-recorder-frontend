@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 // import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 import PhrasesSection from '../../components/PhrasesSection';
+import Navbar from '@/components/Navbar';
 
 const Phrases: NextPage = () => {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -33,7 +34,7 @@ const Phrases: NextPage = () => {
         <meta name="description" content="Record voice phrases for speech data collection" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
+      <Navbar />
       <PhrasesSection />
     </div>
   );

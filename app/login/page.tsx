@@ -67,7 +67,7 @@ const Login: NextPage = () => {
               <div>
                 <p className="text-sm text-[#645D5D]">
                   Don't have an account?{" "}
-                  <Link href="/login"
+                  <Link href="/signup"
                   style={{ textDecoration: "none", color: "#eb512f" }}
                   >
                     Sign up

@@ -30,9 +30,9 @@ const Home: NextPage = () => {
   };
 
   const handleLoginAccount = () => {
-    // setLoginAccountLoading(true);
-    // router.push('/login');
-    // return setLoginAccountLoading(false);
+    setLoginAccountLoading(true);
+    router.push('/login');
+    return setLoginAccountLoading(false);
   };
 
   return (

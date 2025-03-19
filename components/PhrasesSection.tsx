@@ -38,25 +38,25 @@ const PhrasesSection: React.FC = () => {
         meaning: "Good afternoon"
     },
     {
-        id: 1,
+        id: 5,
         recorded: false,
         text: 'Ẹ káàlẹ́',
         meaning: "Good late evening"
     },
     {
-        id: 2,
+        id: 6,
         recorded: false,
         text: 'O dàbọ̀',
         meaning: "Goodbye (Until we meet again)"
     },
     {
-        id: 3,
+        id: 7,
         recorded: false,
         text: 'A dúpẹ́',
         meaning: "Thank you"
     },
     {
-        id: 4,
+        id: 8,
         recorded: false,
         text: 'Jọ̀wọ́',
         meaning: "Please"
@@ -201,37 +201,40 @@ const PhrasesSection: React.FC = () => {
 //   }
   
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-[#e3effc] py-8">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-800">Èdèdún APYP (AI Powered Yorùbá Platform)</h1>
-          <motion.button
-            // onClick={handleLogout}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
-            // components/PhrasesSection.tsx (continued)
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Logout
-          </motion.button>
+        <div className="flex flex-col justify-center items-center mb-8">
+          <h1 className="text-4xl flex justify-center items-center flex-col font-[600] text-[#001C4C] leading-[57px]">
+            Èdèdún AI Powered Yorùbá Platform
+            </h1>
+            <span className='flex font-[400] text-[#012657] leading-[145%] text-lg justify-center items-center'>Select a phrase to record and contribute to the Èdèdún AI Powered Yorùbá Platform (APYP)</span>
         </div>
         
+        <div className="flex flex-col sm:flex-col md:flex-row md:justify-between md:items-center mb-4 gap-4">
+  <div className="text-base font-semibold text-[#001C4C] leading-normal md:leading-[57px]">
+    Phrases To Record
+  </div>
+  
+  <div className="text-sm font-medium text-black w-full md:w-auto md:max-w-xs">
+    <div className="text-sm mb-1">Progress</div>
+    
+    <div className="overflow-hidden text-sm border bg-gray-100 rounded-full mb-1">
+      <div 
+        className="h-2 bg-[#F0F2F5] text-sm border-2 border-[#F56630] rounded-full"
+        style={{ width: `${(phrases.filter(p => p.recorded).length / phrases.length) * 100}%` }}
+      />
+    </div>
+    
+    <div className="text-sm">
+      You are making incredible progress {phrases.filter(p => p.recorded).length}% out of 100%
+    </div>
+  </div>
+</div>
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold text-gray-800">Phrases To Record</h2>
-            <div className="text-sm font-medium text-indigo-600">
-              {phrases.filter(p => p.recorded).length} of {phrases.length} recorded
-            </div>
-          </div>
           
-          <div className="overflow-hidden bg-gray-100 rounded-full mb-6">
-            <div 
-              className="h-2 bg-indigo-500 rounded-full"
-              style={{ width: `${(phrases.filter(p => p.recorded).length / phrases.length) * 100}%` }}
-            />
-          </div>
+
           
-          <div className="space-y-2 mb-6 max-h-60 overflow-y-auto pr-2">
+          <div className="space-y-2 mb-6 max-h-80 overflow-y-auto pr-2">
             {phrases.map((phrase, index) => (
               <motion.div 
                 key={phrase.id}
@@ -245,7 +248,7 @@ const PhrasesSection: React.FC = () => {
                 whileHover={{ scale: 1.01 }}
                 onClick={() => setCurrentPhraseIndex(index)}
               >
-                <div className="flex text-blue-800 hover:cursor-pointer items-center">
+                <div className="flex text-[#101928] font-[600] leading-[145%] hover:cursor-pointer items-center">
                   <div className={`w-4 h-4 rounded-full mr-3 flex-shrink-0 ${
                     phrase.recorded ? 'bg-green-500' : 'bg-gray-300'
                   }`}>
@@ -256,9 +259,11 @@ const PhrasesSection: React.FC = () => {
                     )}
                   </div>
                   <span className={`${currentPhraseIndex === index ? 'font-medium' : ''}`}>
-                    {phrase.text}
+                    <span>
+                      
+                      </span>{phrase.text}
                     <br />
-                    <span className='text-red-900 italic'>{phrase.meaning}</span>
+                    <span className='text-[#008764D9] font-[400]'>{phrase.meaning}</span>
                   </span>
                 </div>
                 
