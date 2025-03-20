@@ -3,9 +3,13 @@ import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 // import { useRouter } from 'next/navigation';
 import Head from 'next/head';
-import PhrasesSection from '../components/PhrasesSection';
+import PhrasesSection from '../../components/PhrasesSection';
+import Recordings from '@/components/RecordingsSection';
+import Navbar from '@/components/Navbar';
 
 const Phrases: NextPage = () => {
+  const [activeView, setActiveView] = useState("Phrases");
+
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   // const router = useRouter();
   
@@ -33,8 +37,9 @@ const Phrases: NextPage = () => {
         <meta name="description" content="Record voice phrases for speech data collection" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <PhrasesSection />
+      <Navbar />
+      {activeView === "Phrases" &&  <PhrasesSection setActiveView={setActiveView} activeView={activeView}/>}
+      {activeView === "Recordings" &&  <Recordings setActiveView={setActiveView} activeView={activeView} />}
     </div>
   );
 };
