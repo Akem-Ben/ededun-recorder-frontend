@@ -1,6 +1,6 @@
 "use client"
 import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 import PhrasesSection from '../../components/PhrasesSection';

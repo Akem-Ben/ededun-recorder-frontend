@@ -1,7 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import type { NextPage } from "next";
-import Image from "next/image";
-import { useEffect } from "react";
 // import { useRouter } from 'next/navigation';
 import Head from "next/head";
 import AuthForm from "../../components/AuthForm";
