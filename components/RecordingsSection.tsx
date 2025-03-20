@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import Button from './Button';
 import { motion } from 'framer-motion';
@@ -11,6 +12,7 @@ interface Phrase {
     recorded: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Recordings: React.FC<any> = ({ setActiveView, activeView }: { setActiveView: any, activeView: any }) => {
 
     const [deleteModal, setDeleteModal] = useState(false)
