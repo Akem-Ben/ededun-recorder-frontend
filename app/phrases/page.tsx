@@ -9,26 +9,6 @@ import Navbar from '@/components/Navbar';
 
 const Phrases: NextPage = () => {
   const [activeView, setActiveView] = useState("Phrases");
-
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const router = useRouter();
-  
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     router.push('/login');
-  //   } else {
-  //     setIsAuthenticated(true);
-  //   }
-  // }, [router]);
-  
-  // if (!isAuthenticated) {
-  //   return (
-  //     <div className="flex items-center justify-center min-h-screen">
-  //       <div className="animate-spin h-10 w-10 text-indigo-600"></div>
-  //     </div>
-  //   );
-  // }
   
   return (
     <div>
