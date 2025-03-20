@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // import axios, { AxiosResponse, AxiosError } from 'axios';
 
 // import config from './axiosLinkToBackend';
@@ -145,7 +147,7 @@ export const withErrorHandling = async <T>(
 
       // Alternatively, for non-React apps, you can use:
       window.location.href = '/login';
-      
+
       toast.error('Please login again, session expired')
     }
 

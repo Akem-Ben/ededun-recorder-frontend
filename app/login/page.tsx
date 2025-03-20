@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { NextPage } from "next";
 import Image from "next/image";
 import { useEffect } from "react";
@@ -28,13 +30,13 @@ const Login: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-  
+
       <div className="flex flex-col md:flex-row min-h-screen relative">
         {/* Left section - hidden on small screens */}
         <div className="hidden md:block md:w-1/2 lg:w-1/2 pt-20 min-h-screen bg-[#001633]">
-          <AuthLeftPage isLogin={true}/>
+          <AuthLeftPage isLogin={true} />
         </div>
-  
+
         {/* Right section - full width on small screens */}
         <section className="w-full md:w-1/2 lg:w-1/2 flex justify-center items-center px-4 sm:px-6 md:px-8 py-20 min-h-screen">
           <div className="flex flex-col justify-center w-full max-w-md my-auto">
@@ -42,7 +44,7 @@ const Login: NextPage = () => {
             <div className="md:hidden flex flex-col justify-center mb-8">
               <Link href="/">
                 <div className="relative h-12 w-36">
-                  <img 
+                  <img
                     src="/general/logo-black.png"
                     alt="Èdèdún Logo"
                     className="object-contain w-full h-full"
@@ -52,7 +54,9 @@ const Login: NextPage = () => {
               <div className="mt-6">
                 <h1 className="text-3xl lg:text-[50px] font-semibold text-[#001C4C] mb-4 lg:mb-[50px] animate__animated animate__fadeInUp">
                   <span className="block">Èdèdún AI Powered</span>
-                  <span className="block mb-4 lg:mb-[24px]">Yoruba Platform</span>
+                  <span className="block mb-4 lg:mb-[24px]">
+                    Yoruba Platform
+                  </span>
                 </h1>
                 <p className="text-base lg:text-lg text-[#012657] animate__animated animate__fadeInUp animate__delay-1s">
                   Login to contribute to the Èdèdún AI Powered
@@ -61,21 +65,22 @@ const Login: NextPage = () => {
                 </p>
               </div>
             </div>
-  
+
             <div className="flex flex-col gap-2 mb-6">
               <h1 className="text-2xl font-bold">Login to your account</h1>
               <div>
                 <p className="text-sm text-[#645D5D]">
-                  Don't have an account?{" "}
-                  <Link href="/signup"
-                  style={{ textDecoration: "none", color: "#eb512f" }}
+                  Don&apos;t have an account?{" "}
+                  <Link
+                    href="/signup"
+                    style={{ textDecoration: "none", color: "#eb512f" }}
                   >
                     Sign up
                   </Link>
                 </p>
               </div>
             </div>
-  
+
             <div className="w-full">
               <AuthForm isLogin={true} />
             </div>

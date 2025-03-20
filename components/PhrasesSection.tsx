@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // components/PhrasesSection.tsx
 "use client"
 import React, { useState, useEffect } from 'react';
