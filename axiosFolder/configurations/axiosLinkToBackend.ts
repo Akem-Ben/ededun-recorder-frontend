@@ -120,7 +120,8 @@ const getAccessToken = () => {
 };
 
 const newAxios = axios.create({
-    baseURL: 'http://localhost:3050/api/v1'
+    baseURL: "https://ededun-recorder-backend.onrender.com/api/v1"
+    // 'http://localhost:3050/api/v1'
 })
 
 // API functions
