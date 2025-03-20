@@ -41,7 +41,7 @@ const Signup: NextPage = () => {
             <div className="md:hidden flex flex-col justify-center mb-8">
               <Link href="/">
                 <div className="relative h-12 w-36">
-                  <img 
+                  <img
                     src="/general/logo-black.png"
                     alt="Èdèdún Logo"
                     className="object-contain w-full h-full"
@@ -49,16 +49,18 @@ const Signup: NextPage = () => {
                 </div>
               </Link>
               <div className="mt-6">
-        <h1 className="text-3xl lg:text-[50px] font-semibold text-[#001C4C] mb-4 lg:mb-[50px] animate__animated animate__fadeInUp">
-          <span className="block">Èdèdún AI Powered</span>
-          <span className="block mb-4 lg:mb-[24px]">Yoruba Platform</span>
-        </h1>
-        <p className="text-base lg:text-lg text-[#012657] animate__animated animate__fadeInUp animate__delay-1s">
-          Sign up to contribute to the Èdèdún AI Powered
-          <br />
-          Yorùbá Platform (APYP)
-        </p>
-      </div>
+                <h1 className="text-3xl lg:text-[50px] font-semibold text-[#001C4C] mb-4 lg:mb-[50px] animate__animated animate__fadeInUp">
+                  <span className="block">Èdèdún AI Powered</span>
+                  <span className="block mb-4 lg:mb-[24px]">
+                    Yoruba Platform
+                  </span>
+                </h1>
+                <p className="text-base lg:text-lg text-[#012657] animate__animated animate__fadeInUp animate__delay-1s">
+                  Sign up to contribute to the Èdèdún AI Powered
+                  <br />
+                  Yorùbá Platform (APYP)
+                </p>
+              </div>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -66,8 +68,9 @@ const Signup: NextPage = () => {
               <div>
                 <p className="text-sm text-[#645D5D]">
                   Already have an account?{" "}
-                  <Link href="/login"
-                  style={{ textDecoration: "none", color: "#eb512f" }}
+                  <Link
+                    href="/login"
+                    style={{ textDecoration: "none", color: "#eb512f" }}
                   >
                     Login
                   </Link>
