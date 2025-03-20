@@ -29,13 +29,13 @@ const AuthLeftPage: React.FC<AuthFormProps> = ({ isLogin }) => {
 
       <div className="w-full">
         <h1 className={"text-3xl lg:text-[50px] font-semibold mb-4 lg:mb-[50px] animate__animated animate__fadeInUp"}
-        style={{color: isLogin ? "#fff" : "#001C4C"}}
+          style={{ color: isLogin ? "#fff" : "#001C4C" }}
         >
           <span className="block">Èdèdún AI Powered</span>
-          <span className="block mb-4 lg:mb-[24px]">Yoruba Platform</span>
+          <span className="block mb-4 lg:mb-[24px]">Yorùbá Platform</span>
         </h1>
         <p className="text-base lg:text-lg animate__animated animate__fadeInUp animate__delay-1s"
-        style={{color: isLogin ? "#fff" : "#012657"}}
+          style={{ color: isLogin ? "#fff" : "#012657" }}
         >
           {!isLogin ? "Sign up to contribute to the Èdèdún AI Powered" : "Login to contribute to the Èdèdún AI Powered"}
           <br />

@@ -21,11 +21,10 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <div
-      onClick={!disabled ? onClick : undefined} // Prevent click if disabled
+      onClick={!disabled ? onClick : undefined}
       style={{ borderRadius, height, backgroundColor }}
-      className={`flex hover:cursor-pointer hover:border-[#E0DEF7] hover:border-2 hover:bg-white hover:text-black font-[700] text-white text-base h-[48px] justify-center items-center px-6 py-[12px] w-full sm:auto ${
-        disabled ? "opacity-50 cursor-not-allowed" : ""
-      }`}
+      className={`flex hover:cursor-pointer border-[#000000] border-2 border hover:border-[#E0DEF7] hover:border-2 hover:bg-white hover:text-black font-[700] text-white text-base h-[48px] justify-center items-center px-6 py-[12px] w-full sm:auto ${disabled ? "opacity-50 cursor-not-allowed" : ""
+        }`}
     >
       <button type={type} disabled={disabled}>
         {children || title}
