@@ -6,7 +6,7 @@ type DeleteModalProps = {
   onDelete?: () => void;
 };
 
-const DeleteModal: FC<DeleteModalProps> = ({ isOpen, onClose, onDelete }) => {
+const DeleteModal: FC<DeleteModalProps> = ({ onClose, onDelete }) => {
 //   if (!isOpen) return null;
 
   return (

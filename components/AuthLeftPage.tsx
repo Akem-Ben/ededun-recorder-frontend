@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import Head from "next/head";
-import type { NextPage } from "next";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { getUnrecordedPhrases, saveRecording } from '../axiosFolder/configurations/axiosLinkToBackend'; // Import your API functions
 
 // Define the shape of the context

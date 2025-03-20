@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 "use client";
 
 import React, { useState, useEffect } from "react";
 import { ChevronDown, Search, X, XCircle } from "lucide-react";
-import NormalInputField from "./NormalInputField";
 
 // You'll need to create this JSON file in your data directory
 // or import it from a package
