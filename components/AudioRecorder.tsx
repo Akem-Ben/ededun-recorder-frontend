@@ -595,25 +595,47 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
                   disabled={isLoading}
                 >
                   <Button backgroundColor="#0F973D">
-                    <div className="flex text-[#FFF] items-center gap-[10px] justify-center">
-                      <div>
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M5 13l4 4L19 7"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                    {isLoading ? (
+                      <div className="flex text-[#FFF] items-center gap-[10px] justify-center">
+                        <div>
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+                            />
+                          </svg>
+                        </div>
+                        <div>Saving...</div>
                       </div>
-                      <div>Save</div>
-                    </div>
+                    ) : (
+                      <div className="flex text-[#FFF] items-center gap-[10px] justify-center">
+                        <div>
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M5 13l4 4L19 7"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                        <div>Save</div>
+                      </div>
+                    )}
                   </Button>
                 </motion.button>
               </>
@@ -628,6 +650,12 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
           😊
         </div>
       </motion.div>
+        <Alerts
+              position="bottom-right"
+              direction="right"
+              timer={3000}
+              className="rounded-md relative z-50 !w-80"
+            />
     </div>
   );
 };

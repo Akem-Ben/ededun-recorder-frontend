@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { getUnrecordedPhrases, saveRecording } from '../axiosFolder/configurations/axiosLinkToBackend'; // Import your API functions
+import { getRecordings, getUnrecordedPhrases, saveRecording } from '../axiosFolder/configurations/axiosLinkToBackend'; // Import your API functions
 
 // Define the shape of the context
 interface PhrasesContextType {
@@ -10,6 +10,7 @@ interface PhrasesContextType {
   isLoading: boolean;
   fetchPhrases: (page?: number) => Promise<void>;
   saveRecording: (audioBlob: Blob, phraseId: string) => Promise<void>;
+  fetchUserRecordings: (page?: number) => Promise<void>;
 //   deleteRecording: (recordingId: string) => Promise<void>;
 }
 
@@ -38,6 +39,22 @@ export const PhrasesProvider: React.FC<{ children: ReactNode }> = ({ children })
       const response:any = await getUnrecordedPhrases(page);
       if (response) {
         setPhrases(response.data.data);
+      }
+      return response;
+    } catch (error) {
+      console.error('Error fetching phrases:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+  const fetchUserRecordings = async (page?: number) => {
+    setIsLoading(true);
+    try {
+      const response:any = await getRecordings(page);
+      if (response) {
+        setRecordings(response.data.data);
       }
       return response;
     } catch (error) {
@@ -92,6 +109,7 @@ export const PhrasesProvider: React.FC<{ children: ReactNode }> = ({ children })
     isLoading,
     fetchPhrases,
     saveRecording: saveRecordingHandler,
+    fetchUserRecordings
   };
 
   return (
