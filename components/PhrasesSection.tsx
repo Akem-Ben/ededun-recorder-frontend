@@ -48,18 +48,18 @@ const PhrasesSection: React.FC<any> = ({
 
       const response: any = await getUnrecordedPhrases(pageNumber);
 
-      if (!response) {
+      if (response.status !== 200) {
         setUnrecordedPhrases([]);
       }
 
-      if (response.data.data) {
-        setUnrecordedPhrases(response.data.data);
+      if (response.data.data.data) {
+        setUnrecordedPhrases(response.data.data.data);
 
-        setTotalPages(response.data.totalPages);
+        setTotalPages(response.data.data.totalPages);
 
         setRecordedCount(0);
 
-        setInitialPhraseCount(response.data.data.length);
+        setInitialPhraseCount(response.data.data.data.length);
 
         return setPhrasesLoading(false);
       } else {

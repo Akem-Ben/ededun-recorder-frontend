@@ -170,28 +170,28 @@ export const loginUser = async (body: any): Promise<AxiosResponse> => {
 };
 
 
-export const saveRecording = async (body: FormData): Promise<AxiosResponse | null> => {
-    const accessToken = getAccessToken();
-  
-    // Wrap the API call with the error handling wrapper
-    const { data, error } = await withErrorHandling(async () => {
-      const response = await newAxios.post(`/users/save-recording`, body, {
-        headers: {
-          'Content-Type': 'multipart/form-data', // Set the correct content type for multipart form data
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      return response; // Return the response directly
-    });
-  
-    if (error) {
-      console.error('Error saving recording:', error);
-      return null;
-    }
-  
-    return data as AxiosResponse; // Return the response if there's no error
-  };
+export const saveRecording = async (
+  body: FormData,
+): Promise<{ data: AxiosResponse | null; error: AxiosError | null }> => {
+  const accessToken = getAccessToken();
 
+  const { data, error } = await withErrorHandling(async () => {
+    const response = await newAxios.post(`/users/save-recording`, body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response;
+  });
+
+  if (error) {
+    console.error('Error saving recording:', error);
+    return { data: null, error };
+  }
+
+  return { data, error: null };
+};
 
   export const getRecordings = async (page?: number): Promise<AxiosResponse | null> => {
     const accessToken = getAccessToken();

@@ -238,10 +238,10 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
 
       formData.append("phraseId", phrase.id.toString());
 
-      const response: any = await saveRecording(formData);
+      const { data, error }: any = await saveRecording(formData);
 
-      if (response) {
-        addAlert("Success", response.message, "success");
+      if (data) {
+        addAlert("Success", data.message, "success");
 
         if (onComplete) onComplete();
 
@@ -251,7 +251,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
 
         onRecordingComplete(phrase.id);
       } else {
-        addAlert("Error", response.message, "error");
+        addAlert("Error", error.message, "error");
 
         setIsLoading(false);
       }
@@ -265,7 +265,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         if (onClose) {
           onClose();
         }
-      }, 2000);
+      }, 1500);
     }
   };
 
@@ -650,12 +650,12 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
           😊
         </div>
       </motion.div>
-        <Alerts
-              position="bottom-right"
-              direction="right"
-              timer={3000}
-              className="rounded-md relative z-50 !w-80"
-            />
+      <Alerts
+        position="bottom-right"
+        direction="right"
+        timer={3000}
+        className="rounded-md relative z-50 !w-80"
+      />
     </div>
   );
 };

@@ -130,32 +130,20 @@ import { toast } from 'react-toastify';
 
 export const withErrorHandling = async <T>(
   apiCall: () => Promise<AxiosResponse<T>>,
-): Promise<{ data: T | null; error: string | null }> => {
+): Promise<{ data: AxiosResponse<T> | null; error: AxiosError | null }> => {
   try {
-    
-    const response:any = await apiCall();
-    return { data: response.data, error: null };
+    const response = await apiCall();
+    return { data: response, error: null }; // Return the full Axios response
   } catch (error: any) {
-    const axiosError:any = error as AxiosError;
+    const axiosError = error as AxiosError;
 
-    // Handle 401 Unauthorized errors
     if (axiosError.response?.status === 401) {
       console.error('Unauthorized: Redirecting to landing page...');
-
-      // Redirect to the landing page (for React apps)
-      // router.push('/'); // Replace with your landing page route
-
-      // Alternatively, for non-React apps, you can use:
       window.location.href = '/login';
-
-      toast.error('Please login again, session expired')
+      toast.error('Please login again, session expired');
     }
 
-    // Handle other errors
-    const errorMessage =
-      axiosError.response?.data?.message || axiosError.message || 'An unexpected error occurred.';
-    console.error('API Error:', errorMessage);
-
-    return { data: null, error: errorMessage };
+    console.error('API Error:', axiosError);
+    return { data: null, error: axiosError }; // Return the full Axios error
   }
 };
