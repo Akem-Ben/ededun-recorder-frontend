@@ -38,10 +38,10 @@ const Home: NextPage = () => {
   // return (
   //   <div className="bg-[#001633] min-h-screen">
   //     <Head>
-  //       <title>Èdèdún - AI Powered Yoruba Platform</title>
+  //       <title>Èdèdún - AI Powered Yorùbá Platform</title>
   //       <meta
   //         name="description"
-  //         content="Contribute to the Èdèdún AI Powered Yorùbá Platform by recording Yoruba phrases"
+  //         content="Contribute to the Èdèdún AI Powered Yorùbá Platform by recording Yorùbá phrases"
   //       />
   //       <link rel="icon" href="/favicon.ico" />
   //     </Head>
@@ -67,11 +67,11 @@ const Home: NextPage = () => {
   //         <h1 className="text-4xl font-bold mb-4 animate__animated animate__fadeInUp">
   //           <span>Welcome To</span>
   //           <span className="block">Èdèdún AI Powered</span>
-  //           <span className="block">Yoruba Platform</span>
+  //           <span className="block">Yorùbá Platform</span>
   //         </h1>
   //         <p className="text-lg text-gray-300 mb-8 animate__animated animate__fadeInUp animate__delay-1s">
-  //           Help build the future of Yoruba language technology by contributing
-  //           your voice. Record Yoruba phrases to train our AI systems.
+  //           Help build the future of Yorùbá language technology by contributing
+  //           your voice. Record Yorùbá phrases to train our AI systems.
   //         </p>
 
   //         <div className="bg-blue-900/30 p-6 rounded-lg mb-8 animate__animated animate__fadeInUp animate__delay-2s">
@@ -79,11 +79,11 @@ const Home: NextPage = () => {
   //           <ul className="space-y-2">
   //             <li className="flex items-start animate__animated animate__fadeInRight animate__delay-2s">
   //               <span className="text-blue-400 mr-2">•</span>
-  //               <span>Preserve and promote the Yoruba language</span>
+  //               <span>Preserve and promote the Yorùbá language</span>
   //             </li>
   //             <li className="flex items-start animate__animated animate__fadeInRight animate__delay-3s">
   //               <span className="text-blue-400 mr-2">•</span>
-  //               <span>Help create accessible AI technologies in Yoruba</span>
+  //               <span>Help create accessible AI technologies in Yorùbá</span>
   //             </li>
   //             <li className="flex items-start animate__animated animate__fadeInRight animate__delay-4s">
   //               <span className="text-blue-400 mr-2">•</span>
@@ -163,10 +163,10 @@ const Home: NextPage = () => {
   return (
     <div className="bg-gradient-to-br from-indigo-900 to-indigo-950 min-h-screen">
       <Head>
-        <title>Èdèdún - AI Powered Yoruba Platform</title>
+        <title>Èdèdún - AI Powered Yorùbá Platform</title>
         <meta
           name="description"
-          content="Contribute to the Èdèdún AI Powered Yorùbá Platform by recording Yoruba phrases"
+          content="Contribute to the Èdèdún AI Powered Yorùbá Platform by recording Yorùbá phrases"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -192,11 +192,11 @@ const Home: NextPage = () => {
           <h1 className="text-4xl font-bold mb-4 animate__animated animate__fadeInUp">
             <span>Welcome To</span>
             <span className="block">Èdèdún AI Powered</span>
-            <span className="block text-emerald-300">Yoruba Platform</span>
+            <span className="block text-emerald-300">Yorùbá Platform</span>
           </h1>
           <p className="text-lg text-emerald-100 mb-8 animate__animated animate__fadeInUp animate__delay-1s">
-            Help build the future of Yoruba language technology by contributing
-            your voice. Record Yoruba phrases to train our AI systems.
+            Help build the future of Yorùbá language technology by contributing
+            your voice. Record Yorùbá phrases to train our AI systems.
           </p>
 
           <div className="bg-emerald-900/30 backdrop-blur-sm p-6 rounded-lg border border-emerald-700/30 shadow-lg mb-8 animate__animated animate__fadeInUp animate__delay-2s">
@@ -206,11 +206,11 @@ const Home: NextPage = () => {
             <ul className="space-y-2">
               <li className="flex items-start animate__animated animate__fadeInRight animate__delay-2s">
                 <span className="text-emerald-400 mr-2">•</span>
-                <span>Preserve and promote the Yoruba language</span>
+                <span>Preserve and promote the Yorùbá language</span>
               </li>
               <li className="flex items-start animate__animated animate__fadeInRight animate__delay-3s">
                 <span className="text-emerald-400 mr-2">•</span>
-                <span>Help create accessible AI technologies in Yoruba</span>
+                <span>Help create accessible AI technologies in Yorùbá</span>
               </li>
               <li className="flex items-start animate__animated animate__fadeInRight animate__delay-4s">
                 <span className="text-emerald-400 mr-2">•</span>

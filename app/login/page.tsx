@@ -56,7 +56,7 @@ const Login: NextPage = () => {
                 <h1 className="text-3xl lg:text-[50px] font-semibold text-[#001C4C] mb-4 lg:mb-[50px] animate__animated animate__fadeInUp">
                   <span className="block">Èdèdún AI Powered</span>
                   <span className="block mb-4 lg:mb-[24px]">
-                    Yoruba Platform
+                  Yorùbá Platform
                   </span>
                 </h1>
                 <p className="text-base lg:text-lg text-[#012657] animate__animated animate__fadeInUp animate__delay-1s">
