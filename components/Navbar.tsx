@@ -6,25 +6,24 @@ import { motion } from "framer-motion";
 import { useAlert, Alerts } from "next-alert";
 
 const Navbar = () => {
-
   const [logoutLoading, setLogoutLoading] = useState(false);
 
-    const { addAlert } = useAlert();
+  const { addAlert } = useAlert();
 
   const handleLogout = () => {
-    const getUser = localStorage.getItem('user')
+    const getUser = localStorage.getItem("user");
 
-    let user: { firstName: any; };
+    let user: { firstName: any };
 
-    if(getUser){
-      user = JSON.parse(getUser)
+    if (getUser) {
+      user = JSON.parse(getUser);
     }
 
     setLogoutLoading(true);
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("user");
-    
+
     setTimeout(() => {
       window.location.href = "/";
       addAlert("", `Goodbye ${user ? user.firstName : ""}`, "success");
@@ -90,7 +89,7 @@ const Navbar = () => {
           </div>
         )}
       </motion.button>
-            {/* <Alerts
+      {/* <Alerts
               position="top-left"
               direction="left"
               timer={3000}
