@@ -1,11 +1,25 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useAlert, Alerts } from "next-alert";
 
 const Navbar = () => {
+
   const [logoutLoading, setLogoutLoading] = useState(false);
 
+    const { addAlert } = useAlert();
+
   const handleLogout = () => {
+    const getUser = localStorage.getItem('user')
+
+    let user: { firstName: any; };
+
+    if(getUser){
+      user = JSON.parse(getUser)
+    }
+
     setLogoutLoading(true);
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
@@ -13,6 +27,7 @@ const Navbar = () => {
     
     setTimeout(() => {
       window.location.href = "/";
+      addAlert("", `Goodbye ${user ? user.firstName : ""}`, "success");
       return setLogoutLoading(false);
     }, 4000);
   };
@@ -75,6 +90,12 @@ const Navbar = () => {
           </div>
         )}
       </motion.button>
+            {/* <Alerts
+              position="top-left"
+              direction="left"
+              timer={3000}
+              className="rounded-md relative z-50 !w-80"
+            /> */}
     </div>
   );
 };

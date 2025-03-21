@@ -105,9 +105,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
 
       if (isLogin) {
         response = await loginUser({ email, password });
-        localStorage.setItem("user", JSON.stringify(response.data.data.user));
-        localStorage.setItem("accessToken", response.data.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.data.refreshToken);
       } else {
         response = await registerUser({
           email,
@@ -131,6 +128,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         return router.push("/login");
       }
 
+      localStorage.setItem("user", JSON.stringify(response.data.data.user));
+      localStorage.setItem("accessToken", response.data.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.data.refreshToken);
+
       addAlert("Success", response.data.message, "success");
 
       setLoading(false);
@@ -138,6 +139,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
       router.push("/phrases");
       setLoading(false);
     } catch (err: any) {
+      addAlert("Error", err.message, "error");
       setError({ ...error, emailError: true });
     } finally {
       setLoading(false);

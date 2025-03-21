@@ -120,7 +120,7 @@ const getAccessToken = () => {
 };
 
 const newAxios = axios.create({
-    baseURL: "http://localhost:3050/api/v1"
+    baseURL: "https://ededun-recorder-backend.onrender.com/api/v1"
     // "https://ededun-recorder-backend.onrender.com/api/v1"
     // 'http://localhost:3050/api/v1'
 })
@@ -190,6 +190,47 @@ export const saveRecording = async (body: FormData): Promise<AxiosResponse | nul
     }
   
     return data as AxiosResponse; // Return the response if there's no error
+  };
+
+
+  export const getRecordings = async (page?: number): Promise<AxiosResponse | null> => {
+    const accessToken = getAccessToken();
+    const { data, error } = await withErrorHandling(async () => {
+      const response = await newAxios.get(`/users/all-my-recordings?page=${page}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response;
+    });
+  
+    if (error) {
+      console.error("Error fetching recordings:", error);
+      return null;
+    }
+  
+    return data as AxiosResponse;
+  };
+
+  export const deleteARecording = async (recordingId: string): Promise<AxiosResponse | null> => {
+    const accessToken = getAccessToken();
+    const { data, error } = await withErrorHandling(async () => {
+      const response = await newAxios.delete(`/users/delete-my-recording/${recordingId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response;
+    });
+  
+    if (error) {
+      console.error("Error deleting recording:", error);
+      return null;
+    }
+  
+    return data as AxiosResponse;
   };
 
 

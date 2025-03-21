@@ -6,6 +6,7 @@ import Head from 'next/head';
 import PhrasesSection from '../../components/PhrasesSection';
 import Recordings from '@/components/RecordingsSection';
 import Navbar from '@/components/Navbar';
+import { Alerts } from 'next-alert';
 
 const Phrases: NextPage = () => {
   const [activeView, setActiveView] = useState("Phrases");
@@ -20,6 +21,13 @@ const Phrases: NextPage = () => {
       <Navbar />
       {activeView === "Phrases" &&  <PhrasesSection setActiveView={setActiveView} activeView={activeView}/>}
       {activeView === "Recordings" &&  <Recordings setActiveView={setActiveView} activeView={activeView} />}
+
+      <Alerts
+        position="bottom-right"
+        direction="right"
+        timer={3000}
+        className="rounded-md relative z-50 !w-80"
+      />
     </div>
   );
 };

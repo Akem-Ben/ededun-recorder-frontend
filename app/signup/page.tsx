@@ -6,6 +6,7 @@ import Head from "next/head";
 import AuthForm from "../../components/AuthForm";
 import AuthLeftPage from "../../components/AuthLeftPage";
 import Link from "next/link";
+import { Alerts } from "next-alert";
 
 const Signup: NextPage = () => {
   // const router = useRouter();
@@ -84,6 +85,12 @@ const Signup: NextPage = () => {
           </div>
         </section>
       </div>
+      <Alerts
+        position="bottom-right"
+        direction="right"
+        timer={3000}
+        className="rounded-md relative z-50 !w-80"
+      />
     </div>
   );
 };
