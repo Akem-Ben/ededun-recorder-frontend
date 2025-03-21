@@ -46,14 +46,16 @@ const Recordings: React.FC<any> = ({
       setPhrasesLoading(true);
       const response: any = await getRecordings(pageNumber);
 
-      if (!response) {
+      console.log('res', response)
+
+      if (response.status !== 200) {
         setRecordings([]);
       }
 
-      if (response.data.data) {
+      if (response.data.data.data) {
         console.log(response.data.data);
-        setRecordings(response.data.data);
-        setTotalPages(response.data.totalPages);
+        setRecordings(response.data.data.data);
+        setTotalPages(response.data.data.totalPages);
       } else {
         setRecordings([]);
       }

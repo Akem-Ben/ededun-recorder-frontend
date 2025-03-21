@@ -3,10 +3,11 @@
 import type { NextPage } from "next";
 // import { useRouter } from 'next/navigation';
 import Head from "next/head";
-import AuthForm from "../../components/AuthForm";
+// import AuthForm from "../../components/AuthForm";
 import AuthLeftPage from "../../components/AuthLeftPage";
 import Link from "next/link";
 import { Alerts } from "next-alert";
+import RegisterAuth from "@/components/RegisterAuth";
 
 const Signup: NextPage = () => {
   // const router = useRouter();
@@ -80,7 +81,7 @@ const Signup: NextPage = () => {
             </div>
 
             <div className="w-full">
-              <AuthForm isLogin={false} />
+              <RegisterAuth />
             </div>
           </div>
         </section>

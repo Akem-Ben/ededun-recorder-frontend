@@ -6,10 +6,11 @@ import Image from "next/image";
 import { useEffect } from "react";
 // import { useRouter } from 'next/navigation';
 import Head from "next/head";
-import AuthForm from "../../components/AuthForm";
+// import AuthForm from "../../components/AuthForm";
 import AuthLeftPage from "../../components/AuthLeftPage";
 import Link from "next/link";
 import { Alerts } from "next-alert";
+import LoginAuth from "@/components/LoginAuth";
 
 const Login: NextPage = () => {
   // const router = useRouter();
@@ -83,7 +84,7 @@ const Login: NextPage = () => {
             </div>
 
             <div className="w-full">
-              <AuthForm isLogin={true} />
+              <LoginAuth />
             </div>
           </div>
         </section>
