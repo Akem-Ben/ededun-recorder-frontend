@@ -6,6 +6,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Spinner from "react-bootstrap/Spinner";
+import { Alerts } from "next-alert";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -24,13 +25,13 @@ const Home: NextPage = () => {
 
   const handleCreateAccount = () => {
     setCreateAccountLoading(true);
-    router.push('/signup');
+    router.push("/signup");
     return setCreateAccountLoading(false);
   };
 
   const handleLoginAccount = () => {
     setLoginAccountLoading(true);
-    router.push('/login');
+    router.push("/login");
     return setLoginAccountLoading(false);
   };
 
@@ -169,7 +170,7 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-  
+
       <div className="container mx-auto px-4 py-12 max-w-4xl">
         {/* Header with logo */}
         <div className="mb-8 animate__animated animate__fadeIn animate__delay-1s">
@@ -185,7 +186,7 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-  
+
         {/* Main content */}
         <div className="text-white mb-12">
           <h1 className="text-4xl font-bold mb-4 animate__animated animate__fadeInUp">
@@ -197,9 +198,11 @@ const Home: NextPage = () => {
             Help build the future of Yoruba language technology by contributing
             your voice. Record Yoruba phrases to train our AI systems.
           </p>
-  
+
           <div className="bg-emerald-900/30 backdrop-blur-sm p-6 rounded-lg border border-emerald-700/30 shadow-lg mb-8 animate__animated animate__fadeInUp animate__delay-2s">
-            <h2 className="text-xl font-semibold mb-3 text-emerald-200">Why Contribute?</h2>
+            <h2 className="text-xl font-semibold mb-3 text-emerald-200">
+              Why Contribute?
+            </h2>
             <ul className="space-y-2">
               <li className="flex items-start animate__animated animate__fadeInRight animate__delay-2s">
                 <span className="text-emerald-400 mr-2">•</span>
@@ -215,15 +218,14 @@ const Home: NextPage = () => {
               </li>
             </ul>
           </div>
-  
+
           <div className="space-y-4 mb-8 animate__animated animate__fadeInUp animate__delay-4s">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <div className="bg-emerald-600 w-full hover:cursor-pointer hover:bg-emerald-500 text-white py-6 text-lg px-3 rounded-lg font-medium text-center transition duration-200 shadow-md animate__animated animate__pulse animate__infinite animate__slower"
+              <div
+                className="bg-emerald-600 w-full hover:cursor-pointer hover:bg-emerald-500 text-white py-6 text-lg px-3 rounded-lg font-medium text-center transition duration-200 shadow-md animate__animated animate__pulse animate__infinite animate__slower"
                 onClick={handleLoginAccount}
               >
-                <button
-                  className=""
-                >
+                <button className="">
                   {loginAccountLoading ? (
                     <Spinner animation="border" variant="info" size="sm" />
                   ) : (
@@ -231,12 +233,11 @@ const Home: NextPage = () => {
                   )}
                 </button>
               </div>
-              <div className="rounded-lg w-full border text-center justify-center items-center py-6 text-lg px-3 flex transition duration-200 border-emerald-500 hover:bg-emerald-900/40 hover:cursor-pointer shadow-md"
+              <div
+                className="rounded-lg w-full border text-center justify-center items-center py-6 text-lg px-3 flex transition duration-200 border-emerald-500 hover:bg-emerald-900/40 hover:cursor-pointer shadow-md"
                 onClick={handleCreateAccount}
               >
-                <button
-                  className="text-lg text-white font-medium text-center"
-                >
+                <button className="text-lg text-white font-medium text-center">
                   {createAccountLoading ? (
                     <Spinner animation="border" variant="success" size="sm" />
                   ) : (
@@ -253,7 +254,7 @@ const Home: NextPage = () => {
             </Link>
           </div>
         </div>
-  
+
         {/* Footer */}
         <footer className="text-emerald-200/70 text-sm animate__animated animate__fadeIn animate__delay-5s">
           <div className="border-t border-emerald-700/30 pt-4 flex flex-col sm:flex-row justify-between items-center">
@@ -281,10 +282,14 @@ const Home: NextPage = () => {
           </div>
         </footer>
       </div>
+      <Alerts
+        position="bottom-right"
+        direction="right"
+        timer={3000}
+        className="rounded-md relative z-50 !w-80"
+      />
     </div>
   );
-  
-  
 };
 
 export default Home;
