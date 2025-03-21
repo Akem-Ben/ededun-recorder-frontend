@@ -279,7 +279,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
   };
 
   return (
-    <div>
+    <>
       {/* Header Section */}
       <div className="flex justify-between">
         <div className="text-base font-semibold text-[#001C4C] leading-normal md:leading-[57px]">
@@ -344,8 +344,8 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
                 {phrase.yoruba_text}
               </span>
               <br />
-              <span className="text-[#008764D9] font-[400]">
-                {phrase.english_text}
+              <span className="text-[#CE2C31] text-sm font-[400] italic">
+                {phrase.pronounciation_note}
               </span>
             </span>
           </div>
@@ -401,31 +401,30 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
               <motion.button
                 key="start-recording"
                 onClick={startRecording}
-                className="flex items-center transition-colors w-full sm:w-auto"
+                className="flex items-center bg-[#1671D9] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 disabled={isLoading}
+                style={{borderRadius: '8px'}}
               >
-                <Button backgroundColor="#1671D9">
-                  <div className="flex items-center gap-[10px] justify-center">
-                    <div>
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                        <circle cx="12" cy="12" r="4" fill="currentColor" />
-                      </svg>
-                    </div>
-                    <div>Record</div>
+                <div className="flex items-center gap-[10px] justify-center">
+                  <div>
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                      <circle cx="12" cy="12" r="4" fill="currentColor" />
+                    </svg>
                   </div>
-                </Button>
+                  <div>Record</div>
+                </div>
               </motion.button>
             )}
 
@@ -433,15 +432,15 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
               <motion.button
                 key="stop-recording"
                 onClick={stopRecording}
-                className="text-white flex items-center transition-colors w-full sm:w-auto"
+                className="flex items-center bg-[#CE2C31] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 disabled={isLoading}
+                style={{borderRadius: '8px'}}
               >
-                <Button backgroundColor="#CE2C31">
                   <div className="flex items-center gap-[10px] justify-center">
                     <div>
                       <svg
@@ -459,7 +458,6 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
                     </div>
                     <div>Stop</div>
                   </div>
-                </Button>
               </motion.button>
             )}
 
@@ -469,15 +467,15 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
                   <motion.button
                     key="play-recording"
                     onClick={playAudio}
-                    className="text-white flex items-center transition-colors w-full sm:w-auto"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     disabled={isLoading}
+                    className="flex items-center bg-[#FFF] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                    style={{borderRadius: '8px', border: '1px solid black'}}
                   >
-                    <Button backgroundColor="#FFF">
                       <div className="flex text-[#101928] items-center gap-[10px] justify-center">
                         <div>
                           <svg
@@ -495,21 +493,20 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
                         </div>
                         <div>Play</div>
                       </div>
-                    </Button>
                   </motion.button>
                 ) : (
                   <motion.button
                     key="pause-playback"
                     onClick={pauseAudio}
-                    className="text-white flex items-center transition-colors w-full sm:w-auto"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     disabled={isLoading}
+                    className="flex items-center bg-[#FFF] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                    style={{borderRadius: '8px', border: '1px solid black'}}
                   >
-                    <Button backgroundColor="#FFF">
                       <div className="flex text-[#101928] items-center gap-[10px] justify-center">
                         <div>
                           <svg
@@ -537,21 +534,20 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
                         </div>
                         <div>Pause</div>
                       </div>
-                    </Button>
                   </motion.button>
                 )}
                 <motion.button
                   key="delete-recording"
                   onClick={resetRecording}
-                  className="text-white flex items-center transition-colors w-full sm:w-auto"
-                  whileHover={{ scale: 1.05 }}
+                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   disabled={isLoading}
+                  className="flex items-center bg-[#CE2C31] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                  style={{borderRadius: '8px'}}
                 >
-                  <Button backgroundColor="#CE2C31">
                     <div className="flex text-[#FFF] items-center gap-[10px] justify-center">
                       <div>
                         <svg
@@ -563,38 +559,37 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
                           <path
                             d="M20.5001 6H3.5"
                             stroke="#FFF"
-                            stroke-width="2.0"
-                            stroke-linecap="round"
+                            strokeWidth="2.0"
+                            strokeLinecap="round"
                           />
                           <path
                             d="M6.5 6C6.55588 6 6.58382 6 6.60915 5.99936C7.43259 5.97849 8.15902 5.45491 8.43922 4.68032C8.44784 4.65649 8.45667 4.62999 8.47434 4.57697L8.57143 4.28571C8.65431 4.03708 8.69575 3.91276 8.75071 3.8072C8.97001 3.38607 9.37574 3.09364 9.84461 3.01877C9.96213 3 10.0932 3 10.3553 3H13.6447C13.9068 3 14.0379 3 14.1554 3.01877C14.6243 3.09364 15.03 3.38607 15.2493 3.8072C15.3043 3.91276 15.3457 4.03708 15.4286 4.28571L15.5257 4.57697C15.5433 4.62992 15.5522 4.65651 15.5608 4.68032C15.841 5.45491 16.5674 5.97849 17.3909 5.99936C17.4162 6 17.4441 6 17.5 6"
                             stroke="#FFF"
-                            stroke-width="2.0"
+                            strokeWidth="2.0"
                           />
                           <path
                             d="M18.3735 15.3991C18.1965 18.054 18.108 19.3815 17.243 20.1907C16.378 21 15.0476 21 12.3868 21H11.6134C8.9526 21 7.6222 21 6.75719 20.1907C5.89218 19.3815 5.80368 18.054 5.62669 15.3991L5.16675 8.5M18.8334 8.5L18.6334 11.5"
                             stroke="#FFF"
-                            stroke-width="2.0"
-                            stroke-linecap="round"
+                            strokeWidth="2.0"
+                            strokeLinecap="round"
                           />
                         </svg>
                       </div>
                       <div>Delete</div>
                     </div>
-                  </Button>
                 </motion.button>
                 <motion.button
                   key="save-recording"
                   onClick={handleSave}
-                  className="flex items-center gap-2 transition-colors w-full sm:w-auto"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   disabled={isLoading}
-                >
-                  <Button backgroundColor="#0F973D">
+                  className="flex items-center gap-2 bg-[#0F973D] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                  style={{borderRadius: '8px'}}
+                  >
                     {isLoading ? (
                       <div className="flex text-[#FFF] items-center gap-[10px] justify-center">
                         <div>
@@ -636,7 +631,6 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
                         <div>Save</div>
                       </div>
                     )}
-                  </Button>
                 </motion.button>
               </>
             )}
@@ -656,7 +650,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         timer={3000}
         className="rounded-md relative z-50 !w-80"
       />
-    </div>
+    </>
   );
 };
 

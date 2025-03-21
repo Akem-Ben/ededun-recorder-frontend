@@ -128,7 +128,7 @@ const PhoneInputCustom: React.FC<PhoneInputProps> = ({
 
       {/* Country Selection Modal */}
       {modalVisible && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-end sm:items-center justify-center">
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center sm:items-center justify-center">
           <div className="bg-white w-full max-w-md rounded-t-2xl sm:rounded-xl max-h-[80vh] flex flex-col">
             {/* Modal Header */}
             <div className="flex justify-between items-center p-4 border-b border-[#E0E0E0]">

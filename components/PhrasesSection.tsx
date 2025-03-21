@@ -246,11 +246,13 @@ const PhrasesSection: React.FC<any> = ({
                       currentPhraseIndex === index ? "font-medium" : ""
                     }`}
                   >
-                    <span className="font-[600] text-base sm:text-[16px]">
-                      {phrase.yoruba_text}
+                    <span className="font-[700] text-base sm:text-[16px]">
+                      {phrase.yoruba_text} ({phrase.english_text})
                     </span>
                     <br />
-                    {/* <span className="text-[#008764D9] font-[400]">{phrase.english_text}</span> */}
+                    {/* <span className="text-[#008764D9] text-sm font-[400]">{phrase.english_text}</span> */}
+                    {/* <br /> */}
+                    <span className="text-[#CE2C31] text-sm italic font-[500]">{phrase.pronounciation_note}</span>
                   </span>
                 </div>
                 <div>

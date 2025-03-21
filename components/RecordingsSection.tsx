@@ -255,7 +255,7 @@ const Recordings: React.FC<any> = ({
                             </div>
                             <span>
                               <span className="font-[600] text-lg sm:text-[20px]">
-                                {recording.phrase.yoruba_text}
+                                {recording.phrase.yoruba_text} ({recording.phrase.english_text})
                               </span>
                             </span>
                           </div>
@@ -265,14 +265,15 @@ const Recordings: React.FC<any> = ({
                                 onClick={() =>
                                   handlePlayStop(recording.recording_url)
                                 }
-                                className="flex items-center gap-2 transition-colors"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
+                                className="flex items-center gap-2 bg-[#FFF] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                                style={{borderRadius: '8px', border: '1px solid black'}}
+                              
                               >
-                                <Button backgroundColor="#FFF">
                                   <div className="flex text-[#101928] items-center gap-[5px] sm:gap-[10px]">
                                     <div>
                                       {currentlyPlaying ===
@@ -311,7 +312,6 @@ const Recordings: React.FC<any> = ({
                                         : "Play"}
                                     </div>
                                   </div>
-                                </Button>
                               </motion.button>
 
                               <motion.button
@@ -319,15 +319,15 @@ const Recordings: React.FC<any> = ({
                                     setRecordingToDelete(recording.id);
                                     setDeleteModal(true);
                                   }}
-                                className="flex items-center gap-2 transition-colors"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 disabled={trackRecording}
+                                className="flex items-center gap-2 bg-[#CE2C31] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                                style={{borderRadius: '8px'}}              
                               >
-                                <Button backgroundColor="#CE2C31">
                                   <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
                                     <div>
                                       <svg
@@ -359,7 +359,6 @@ const Recordings: React.FC<any> = ({
                                       Delete
                                     </div>
                                   </div>
-                                </Button>
                               </motion.button>
                             </div>
                             <div className="mt-2">
@@ -385,7 +384,6 @@ const Recordings: React.FC<any> = ({
             <div className="p-4 sm:p-6 flex flex-row sm:flex-col justify-between gap-2 sm:gap-0">
               <div>
                 <motion.button
-                  className="flex items-center gap-2 transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0 }}
@@ -393,8 +391,9 @@ const Recordings: React.FC<any> = ({
                   exit={{ opacity: 0 }}
                   disabled={pageNumber === 1}
                   onClick={handlePreviousPage}
+                  className="flex items-center gap-2 bg-[#0F973D] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                  style={{borderRadius: '8px'}} 
                 >
-                  <Button backgroundColor="#0F973D">
                     <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
                       <div>
                         <svg
@@ -414,12 +413,10 @@ const Recordings: React.FC<any> = ({
                       </div>
                       <div className="text-sm sm:text-base">Previous</div>
                     </div>
-                  </Button>
                 </motion.button>
               </div>
               <div>
                 <motion.button
-                  className="flex items-center gap-2 transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0 }}
@@ -427,8 +424,9 @@ const Recordings: React.FC<any> = ({
                   exit={{ opacity: 0 }}
                   onClick={handleNextPage}
                   disabled={pageNumber === totalPages}
+                  className="flex items-center gap-2 bg-[#0F973D] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                  style={{borderRadius: '8px'}} 
                 >
-                  <Button backgroundColor="#0F973D">
                     <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
                       <div>
                         <svg
@@ -448,7 +446,6 @@ const Recordings: React.FC<any> = ({
                       </div>
                       <div className="text-sm sm:text-base">Next</div>
                     </div>
-                  </Button>
                 </motion.button>
               </div>
             </div>
