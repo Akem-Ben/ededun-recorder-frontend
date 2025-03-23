@@ -19,6 +19,7 @@ interface AudioRecorderProps {
   onClose?: () => void;
   onRecordingComplete: (id: any) => void;
   fetchPhrases: (pageNumber: number) => Promise<any>;
+  onLoadingChange?: (isLoading: boolean) => void;
 }
 
 const AudioRecorder: React.FC<AudioRecorderProps> = ({
@@ -27,6 +28,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
   onComplete,
   onClose,
   onRecordingComplete,
+  onLoadingChange
 }) => {
   const [recordingState, setRecordingState] = useState<RecordingState>("idle");
   const [audioURL, setAudioURL] = useState<string | null>(null);
@@ -78,6 +80,13 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
   useEffect(() => {
     recordingStateRef.current = recordingState;
   }, [recordingState]);
+
+  useEffect(() => {
+    if (onLoadingChange) {
+      onLoadingChange(isLoading);
+    }
+  }, [isLoading, onLoadingChange]);
+
 
   const startRecording = async () => {
     try {
@@ -178,9 +187,8 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
     }
   };
 
-  // Updated handleRecorderClose function
   const handleRecorderClose = () => {
-    // Stop any ongoing recording
+
     if (
       mediaRecorderRef.current &&
       (recordingState === "recording" || recordingState === "paused")
@@ -265,7 +273,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         if (onClose) {
           onClose();
         }
-      }, 1500);
+      }, 500);
     }
   };
 
