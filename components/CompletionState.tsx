@@ -22,7 +22,7 @@ const CompletionState: React.FC = () => {
           Congratulations! 🎉
         </h2>
         <p className="mt-2 text-gray-600">
-          You have finished the first set. Great job! Proceed to the next page
+          You have finished some Phrases. Awesome job! Proceed to the next page
           to continue.
         </p>
       </div>
