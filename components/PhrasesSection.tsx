@@ -37,6 +37,12 @@ const PhrasesSection: React.FC<any> = ({
 
   const [unrecordedPhrases, setUnrecordedPhrases] = useState<any>([]);
 
+  const [isRecordingLoading, setIsRecordingLoading] = useState(false);
+
+  const handleLoadingChange = (isLoading: boolean) => {
+    setIsRecordingLoading(isLoading);
+  };
+
   const { fetchPhrases } = usePhrases();
 
   const [totalPages, setTotalPages] = useState(1);
@@ -259,36 +265,46 @@ const PhrasesSection: React.FC<any> = ({
                               </span>
                             </span>
                           </div>
-                          <div>
-                            <Button
-                              backgroundColor="#1671D9"
-                              onClick={() => setCurrentPhraseIndex(index)}
-                            >
-                              <div className="flex items-center gap-[5px] sm:gap-[10px]">
-                                <div>
-                                  <svg
-                                    width="14"
-                                    height="20"
-                                    viewBox="0 0 14 20"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M7 12.5C8.66 12.5 10 11.16 10 9.5V3.5C10 1.84 8.66 0.5 7 0.5C5.34 0.5 4 1.84 4 3.5V9.5C4 11.16 5.34 12.5 7 12.5Z"
-                                      fill="white"
-                                    />
-                                    <path
-                                      d="M12 9.5C12 12.26 9.76 14.5 7 14.5C4.24 14.5 2 12.26 2 9.5H0C0 13.03 2.61 15.93 6 16.42V19.5H8V16.42C11.39 15.93 14 13.03 14 9.5H12Z"
-                                      fill="white"
-                                    />
-                                  </svg>
-                                </div>
-                                <div className="text-sm sm:text-base">
-                                  Start Recording
-                                </div>
+                          <motion.button
+                            key="start-recording"
+                            onClick={() => setCurrentPhraseIndex(index)}
+                            className={`flex items-center font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto ${
+                              isRecordingLoading
+                                ? "bg-[#A0C4F3] cursor-not-allowed"
+                                : "bg-[#1671D9]"
+                            }`}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            disabled={isRecordingLoading}
+                            style={{ borderRadius: "8px" }}
+                          >
+                            <div className="flex items-center gap-[5px] sm:gap-[10px]">
+                              <div>
+                                <svg
+                                  width="14"
+                                  height="20"
+                                  viewBox="0 0 14 20"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M7 12.5C8.66 12.5 10 11.16 10 9.5V3.5C10 1.84 8.66 0.5 7 0.5C5.34 0.5 4 1.84 4 3.5V9.5C4 11.16 5.34 12.5 7 12.5Z"
+                                    fill="white"
+                                  />
+                                  <path
+                                    d="M12 9.5C12 12.26 9.76 14.5 7 14.5C4.24 14.5 2 12.26 2 9.5H0C0 13.03 2.61 15.93 6 16.42V19.5H8V16.42C11.39 15.93 14 13.03 14 9.5H12Z"
+                                    fill="white"
+                                  />
+                                </svg>
                               </div>
-                            </Button>
-                          </div>
+                              <div className="text-sm sm:text-base">
+                                Start Recording
+                              </div>
+                            </div>
+                          </motion.button>
                         </div>
                       </div>
                     </motion.div>
@@ -386,6 +402,7 @@ const PhrasesSection: React.FC<any> = ({
                     unrecordedPhrases[currentPhraseIndex].id
                   )
                 }
+                onLoadingChange={handleLoadingChange}
               />
             </motion.div>
           </AnimatePresence>
