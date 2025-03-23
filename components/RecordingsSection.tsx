@@ -31,11 +31,13 @@ const Recordings: React.FC<any> = ({
   const { fetchUserRecordings } = usePhrases();
   const [totalPages, setTotalPages] = useState(1);
   const [recordings, setRecordings] = useState<any>([]);
-  const [recordingToDelete, setRecordingToDelete] = useState<string | null>(null);
+  const [recordingToDelete, setRecordingToDelete] = useState<string | null>(
+    null
+  );
   const { addAlert } = useAlert();
   const [phrasesLoading, setPhrasesLoading] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [deleteLoading, setDeleteLoading] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [trackRecording, setTrackRecording] = useState(false);
   const [currentTime, setCurrentTime] = useState(0); // Track current playback time
   const [duration, setDuration] = useState(0); // Track total duration of the audio
@@ -46,7 +48,7 @@ const Recordings: React.FC<any> = ({
       setPhrasesLoading(true);
       const response: any = await getRecordings(pageNumber);
 
-      console.log('res', response)
+      console.log("res", response);
 
       if (response.status !== 200) {
         setRecordings([]);
@@ -86,13 +88,12 @@ const Recordings: React.FC<any> = ({
       ) as HTMLAudioElement;
       if (audioElement) {
         audioElement.pause();
-        audioElement.currentTime = 0; // Reset audio to the beginning
+        audioElement.currentTime = 0;
       }
-      setCurrentlyPlaying(null); // Clear the currently playing audio
-      setTrackRecording(false); // Enable delete buttons
-      setCurrentTime(0); // Reset progress bar
+      setCurrentlyPlaying(null);
+      setTrackRecording(false);
+      setCurrentTime(0);
     } else {
-      // If a different audio is playing, stop it and play the new one
       if (currentlyPlaying) {
         const previousAudioElement = document.getElementById(
           "audio-element"
@@ -102,17 +103,16 @@ const Recordings: React.FC<any> = ({
           previousAudioElement.currentTime = 0;
         }
       }
-      setCurrentlyPlaying(recordingUrl); // Set the new audio as currently playing
-      setTrackRecording(true); // Disable delete buttons
+      setCurrentlyPlaying(recordingUrl);
+      setTrackRecording(true);
     }
   };
 
   const handleDelete = async (recordingUrl: string) => {
-    setDeleteLoading(true)
-    // Delete the recording
+    setDeleteLoading(true);
     const data = await deleteARecording(recordingUrl);
     if (!data) {
-      setDeleteLoading(false)
+      setDeleteLoading(false);
       return addAlert(
         "Error",
         "Unable to delete, please try again or contact admin",
@@ -121,8 +121,8 @@ const Recordings: React.FC<any> = ({
     }
 
     addAlert("Success", "Recording deleted successfully", "success");
-    setDeleteLoading(false)
-    await fetchUserRecordings(1)
+    setDeleteLoading(false);
+    await fetchUserRecordings(1);
     setRecordings((prev: any) =>
       prev.filter((recording: any) => recording?.recording_url !== recordingUrl)
     );
@@ -186,18 +186,6 @@ const Recordings: React.FC<any> = ({
                           />
                         </div>
                       </div>
-                      <div className="flex gap-2 sm:gap-12">
-                        <SkeletonLoader
-                          width="80px"
-                          height="40px"
-                          borderRadius="8px"
-                        />
-                        <SkeletonLoader
-                          width="80px"
-                          height="40px"
-                          borderRadius="8px"
-                        />
-                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -255,7 +243,8 @@ const Recordings: React.FC<any> = ({
                             </div>
                             <span>
                               <span className="font-[600] text-lg sm:text-[20px]">
-                                {recording.phrase.yoruba_text} ({recording.phrase.english_text})
+                                {recording.phrase.yoruba_text} (
+                                {recording.phrase.english_text})
                               </span>
                             </span>
                           </div>
@@ -271,54 +260,56 @@ const Recordings: React.FC<any> = ({
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 className="flex items-center gap-2 bg-[#FFF] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
-                                style={{borderRadius: '8px', border: '1px solid black'}}
-                              
+                                style={{
+                                  borderRadius: "8px",
+                                  border: "1px solid black",
+                                }}
                               >
-                                  <div className="flex text-[#101928] items-center gap-[5px] sm:gap-[10px]">
-                                    <div>
-                                      {currentlyPlaying ===
-                                      recording.recording_url ? (
-                                        <svg
-                                          width="20"
-                                          height="21"
-                                          viewBox="0 0 20 21"
-                                          fill="none"
-                                          xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                          <path
-                                            d="M10.002 0.499023C4.48195 0.499023 0.00195312 4.97902 0.00195312 10.499C0.00195312 16.019 4.48195 20.499 10.002 20.499C15.522 20.499 20.002 16.019 20.002 10.499C20.002 4.97902 15.522 0.499023 10.002 0.499023ZM10.002 18.499C5.59195 18.499 2.00195 14.909 2.00195 10.499C2.00195 6.08902 5.59195 2.49902 10.002 2.49902C14.412 2.49902 18.002 6.08902 18.002 10.499C18.002 14.909 14.412 18.499 10.002 18.499ZM6.5 7.49902H13.5V13.499H6.5V7.49902Z"
-                                            fill="#101928"
-                                          />
-                                        </svg>
-                                      ) : (
-                                        <svg
-                                          width="20"
-                                          height="21"
-                                          viewBox="0 0 20 21"
-                                          fill="none"
-                                          xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                          <path
-                                            d="M10.002 0.499023C4.48195 0.499023 0.00195312 4.97902 0.00195312 10.499C0.00195312 16.019 4.48195 20.499 10.002 20.499C15.522 20.499 20.002 16.019 20.002 10.499C20.002 4.97902 15.522 0.499023 10.002 0.499023ZM10.002 18.499C5.59195 18.499 2.00195 14.909 2.00195 10.499C2.00195 6.08902 5.59195 2.49902 10.002 2.49902C14.412 2.49902 18.002 6.08902 18.002 10.499C18.002 14.909 14.412 18.499 10.002 18.499ZM7.50195 14.999L14.502 10.499L7.50195 5.99902V14.999Z"
-                                            fill="#101928"
-                                          />
-                                        </svg>
-                                      )}
-                                    </div>
-                                    <div className="text-sm sm:text-base">
-                                      {currentlyPlaying ===
-                                      recording.recording_url
-                                        ? "Stop"
-                                        : "Play"}
-                                    </div>
+                                <div className="flex text-[#101928] items-center gap-[5px] sm:gap-[10px]">
+                                  <div>
+                                    {currentlyPlaying ===
+                                    recording.recording_url ? (
+                                      <svg
+                                        width="20"
+                                        height="21"
+                                        viewBox="0 0 20 21"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M10.002 0.499023C4.48195 0.499023 0.00195312 4.97902 0.00195312 10.499C0.00195312 16.019 4.48195 20.499 10.002 20.499C15.522 20.499 20.002 16.019 20.002 10.499C20.002 4.97902 15.522 0.499023 10.002 0.499023ZM10.002 18.499C5.59195 18.499 2.00195 14.909 2.00195 10.499C2.00195 6.08902 5.59195 2.49902 10.002 2.49902C14.412 2.49902 18.002 6.08902 18.002 10.499C18.002 14.909 14.412 18.499 10.002 18.499ZM6.5 7.49902H13.5V13.499H6.5V7.49902Z"
+                                          fill="#101928"
+                                        />
+                                      </svg>
+                                    ) : (
+                                      <svg
+                                        width="20"
+                                        height="21"
+                                        viewBox="0 0 20 21"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M10.002 0.499023C4.48195 0.499023 0.00195312 4.97902 0.00195312 10.499C0.00195312 16.019 4.48195 20.499 10.002 20.499C15.522 20.499 20.002 16.019 20.002 10.499C20.002 4.97902 15.522 0.499023 10.002 0.499023ZM10.002 18.499C5.59195 18.499 2.00195 14.909 2.00195 10.499C2.00195 6.08902 5.59195 2.49902 10.002 2.49902C14.412 2.49902 18.002 6.08902 18.002 10.499C18.002 14.909 14.412 18.499 10.002 18.499ZM7.50195 14.999L14.502 10.499L7.50195 5.99902V14.999Z"
+                                          fill="#101928"
+                                        />
+                                      </svg>
+                                    )}
                                   </div>
+                                  <div className="text-sm sm:text-base">
+                                    {currentlyPlaying ===
+                                    recording.recording_url
+                                      ? "Stop"
+                                      : "Play"}
+                                  </div>
+                                </div>
                               </motion.button>
 
                               <motion.button
-                                  onClick={() => {
-                                    setRecordingToDelete(recording.id);
-                                    setDeleteModal(true);
-                                  }}
+                                onClick={() => {
+                                  setRecordingToDelete(recording.id);
+                                  setDeleteModal(true);
+                                }}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 initial={{ opacity: 0 }}
@@ -326,39 +317,39 @@ const Recordings: React.FC<any> = ({
                                 exit={{ opacity: 0 }}
                                 disabled={trackRecording}
                                 className="flex items-center gap-2 bg-[#CE2C31] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
-                                style={{borderRadius: '8px'}}              
+                                style={{ borderRadius: "8px" }}
                               >
-                                  <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
-                                    <div>
-                                      <svg
-                                        className="w-5 h-5"
-                                        viewBox="0 0 24 24"
-                                        fill="#FFF"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          d="M20.5001 6H3.5"
-                                          stroke="#FFF"
-                                          strokeWidth="2.0"
-                                          strokeLinecap="round"
-                                        />
-                                        <path
-                                          d="M6.5 6C6.55588 6 6.58382 6 6.60915 5.99936C7.43259 5.97849 8.15902 5.45491 8.43922 4.68032C8.44784 4.65649 8.45667 4.62999 8.47434 4.57697L8.57143 4.28571C8.65431 4.03708 8.69575 3.91276 8.75071 3.8072C8.97001 3.38607 9.37574 3.09364 9.84461 3.01877C9.96213 3 10.0932 3 10.3553 3H13.6447C13.9068 3 14.0379 3 14.1554 3.01877C14.6243 3.09364 15.03 3.38607 15.2493 3.8072C15.3043 3.91276 15.3457 4.03708 15.4286 4.28571L15.5257 4.57697C15.5433 4.62992 15.5522 4.65651 15.5608 4.68032C15.841 5.45491 16.5674 5.97849 17.3909 5.99936C17.4162 6 17.4441 6 17.5 6"
-                                          stroke="#FFF"
-                                          strokeWidth="2.0"
-                                        />
-                                        <path
-                                          d="M18.3735 15.3991C18.1965 18.054 18.108 19.3815 17.243 20.1907C16.378 21 15.0476 21 12.3868 21H11.6134C8.9526 21 7.6222 21 6.75719 20.1907C5.89218 19.3815 5.80368 18.054 5.62669 15.3991L5.16675 8.5M18.8334 8.5L18.6334 11.5"
-                                          stroke="#FFF"
-                                          strokeWidth="2.0"
-                                          strokeLinecap="round"
-                                        />
-                                      </svg>
-                                    </div>
-                                    <div className="text-sm sm:text-base">
-                                      Delete
-                                    </div>
+                                <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
+                                  <div>
+                                    <svg
+                                      className="w-5 h-5"
+                                      viewBox="0 0 24 24"
+                                      fill="#FFF"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M20.5001 6H3.5"
+                                        stroke="#FFF"
+                                        strokeWidth="2.0"
+                                        strokeLinecap="round"
+                                      />
+                                      <path
+                                        d="M6.5 6C6.55588 6 6.58382 6 6.60915 5.99936C7.43259 5.97849 8.15902 5.45491 8.43922 4.68032C8.44784 4.65649 8.45667 4.62999 8.47434 4.57697L8.57143 4.28571C8.65431 4.03708 8.69575 3.91276 8.75071 3.8072C8.97001 3.38607 9.37574 3.09364 9.84461 3.01877C9.96213 3 10.0932 3 10.3553 3H13.6447C13.9068 3 14.0379 3 14.1554 3.01877C14.6243 3.09364 15.03 3.38607 15.2493 3.8072C15.3043 3.91276 15.3457 4.03708 15.4286 4.28571L15.5257 4.57697C15.5433 4.62992 15.5522 4.65651 15.5608 4.68032C15.841 5.45491 16.5674 5.97849 17.3909 5.99936C17.4162 6 17.4441 6 17.5 6"
+                                        stroke="#FFF"
+                                        strokeWidth="2.0"
+                                      />
+                                      <path
+                                        d="M18.3735 15.3991C18.1965 18.054 18.108 19.3815 17.243 20.1907C16.378 21 15.0476 21 12.3868 21H11.6134C8.9526 21 7.6222 21 6.75719 20.1907C5.89218 19.3815 5.80368 18.054 5.62669 15.3991L5.16675 8.5M18.8334 8.5L18.6334 11.5"
+                                        stroke="#FFF"
+                                        strokeWidth="2.0"
+                                        strokeLinecap="round"
+                                      />
+                                    </svg>
                                   </div>
+                                  <div className="text-sm sm:text-base">
+                                    Delete
+                                  </div>
+                                </div>
                               </motion.button>
                             </div>
                             <div className="mt-2">
@@ -392,27 +383,27 @@ const Recordings: React.FC<any> = ({
                   disabled={pageNumber === 1}
                   onClick={handlePreviousPage}
                   className="flex items-center gap-2 bg-[#0F973D] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
-                  style={{borderRadius: '8px'}} 
+                  style={{ borderRadius: "8px" }}
                 >
-                    <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
-                      <div>
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M5 13l4 4L19 7"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <div className="text-sm sm:text-base">Previous</div>
+                  <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
+                    <div>
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M5 13l4 4L19 7"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </div>
+                    <div className="text-sm sm:text-base">Previous</div>
+                  </div>
                 </motion.button>
               </div>
               <div>
@@ -425,27 +416,27 @@ const Recordings: React.FC<any> = ({
                   onClick={handleNextPage}
                   disabled={pageNumber === totalPages}
                   className="flex items-center gap-2 bg-[#0F973D] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
-                  style={{borderRadius: '8px'}} 
+                  style={{ borderRadius: "8px" }}
                 >
-                    <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
-                      <div>
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M5 13l4 4L19 7"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <div className="text-sm sm:text-base">Next</div>
+                  <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
+                    <div>
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M5 13l4 4L19 7"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </div>
+                    <div className="text-sm sm:text-base">Next</div>
+                  </div>
                 </motion.button>
               </div>
             </div>
@@ -454,32 +445,34 @@ const Recordings: React.FC<any> = ({
       </div>
 
       {deleteModal && (
-  <DeleteModal
-    onClose={() => {
-      setDeleteModal(false); // Close the modal
-      setRecordingToDelete(null); // Reset the recording ID
-    }}
-    onDelete={async (recordingId) => {
-      setDeleteLoading(true); // Set global loading state (optional)
-      const data = await deleteARecording(recordingId); // Call the delete endpoint
-      if (!data) {
-        setDeleteLoading(false); // Reset global loading state
-        return addAlert(
-          "Error",
-          "Unable to delete, please try again or contact admin",
-          "error"
-        );
-      }
-      addAlert("Success", "Recording deleted successfully", "success");
-      setDeleteLoading(false); // Reset global loading state
-      await fetchUserRecordings(1); // Refresh the recordings list
-      setRecordings((prev: any) =>
-        prev.filter((recording: any) => recording?.recording_url !== recordingId)
-      );
-    }}
-    recordingId={recordingToDelete || ""} // Pass the recording ID to the modal
-  />
-)}
+        <DeleteModal
+          onClose={() => {
+            setDeleteModal(false); // Close the modal
+            setRecordingToDelete(null); // Reset the recording ID
+          }}
+          onDelete={async (recordingId) => {
+            setDeleteLoading(true); // Set global loading state (optional)
+            const data = await deleteARecording(recordingId); // Call the delete endpoint
+            if (!data) {
+              setDeleteLoading(false); // Reset global loading state
+              return addAlert(
+                "Error",
+                "Unable to delete, please try again or contact admin",
+                "error"
+              );
+            }
+            addAlert("Success", "Recording deleted successfully", "success");
+            setDeleteLoading(false); // Reset global loading state
+            await fetchUserRecordings(1); // Refresh the recordings list
+            setRecordings((prev: any) =>
+              prev.filter(
+                (recording: any) => recording?.recording_url !== recordingId
+              )
+            );
+          }}
+          recordingId={recordingToDelete || ""} // Pass the recording ID to the modal
+        />
+      )}
       {/* Hidden audio element for playback */}
       {currentlyPlaying && (
         <audio

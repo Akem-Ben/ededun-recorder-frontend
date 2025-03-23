@@ -265,7 +265,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         if (onClose) {
           onClose();
         }
-      }, 1500);
+      }, 500);
     }
   };
 
