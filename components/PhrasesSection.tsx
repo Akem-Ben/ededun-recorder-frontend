@@ -85,7 +85,6 @@ const PhrasesSection: React.FC<any> = ({
       prevPhrases.filter((phrase) => phrase.id !== phraseId)
     );
 
-    // Increment the recorded count
     setRecordedCount((prev) => prev + 1);
   };
 
@@ -110,7 +109,9 @@ const PhrasesSection: React.FC<any> = ({
   };
 
   const progress =
-    initialPhraseCount === 0 ? 0 : (recordedCount / initialPhraseCount) * 100;
+    initialPhraseCount === 0 || Number.isNaN(initialPhraseCount)
+      ? 0
+      : (recordedCount / initialPhraseCount) * 100;
 
   return (
     <div className="min-h-screen bg-[#e3effc] py-4 sm:py-8">
@@ -142,7 +143,7 @@ const PhrasesSection: React.FC<any> = ({
             <div className="text-sm mb-1">Progress</div>
             <div className="overflow-hidden text-sm border bg-gray-100 rounded-full mb-1">
               <div
-                className="h-2 bg-[#F0F2F5] text-sm border-2 bg-[#F56630] border-[#F56630] rounded-full"
+                className="h-2 text-sm border-2 bg-[#F56630] border-[#F56630] rounded-full"
                 style={{ width: `${progress}%` }}
               />
             </div>
