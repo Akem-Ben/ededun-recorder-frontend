@@ -1,104 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
-import { withErrorHandling } from './axiosSetup';
+import { withErrorHandling } from '../configurations/axiosSetup';
 
-// // Create a custom Axios instance
-// const customAxios = axios
-
-// const newAxios = customAxios.create({
-//     baseURL: 'http://localhost:3050/api/v1',
-//   });
-
-// // Handle successful responses
-// const handleResponse = (response: AxiosResponse): AxiosResponse => {
-//   const newAccessToken = response.headers['x-access-token'];
-//   const newRefreshToken = response.headers['x-refresh-token'];
-
-//   if (newAccessToken && newRefreshToken) {
-//     storeTokens(newAccessToken, newRefreshToken);
-//   }
-
-//   return response;
-// };
-
-// // Handle errors
-// const handleError = async (error: AxiosError) => {
-//   if (error.response?.status === 401) {
-//     const refreshToken = getRefreshToken();
-
-//     if (refreshToken) {
-//       try {
-//         const originalRequest = error.config as AxiosRequestConfig;
-//         return await retryWithNewTokens(originalRequest);
-//       } catch (retryError) {
-//         clearClientStorage();
-//         redirectToHomePage();
-//         return Promise.reject(retryError);
-//       }
-//     }
-
-//     clearClientStorage();
-//     redirectToHomePage();
-//   }
-
-//   return Promise.reject(error);
-// };
-
-// // Retry the request with new tokens
-// const retryWithNewTokens = async (originalConfig: AxiosRequestConfig): Promise<AxiosResponse> => {
-//   const newAccessToken = getAccessToken();
-
-//   if (newAccessToken) {
-//     originalConfig.headers = {
-//       ...originalConfig.headers,
-//       Authorization: `Bearer ${newAccessToken}`,
-//     };
-//     return await newAxios(originalConfig);
-//   }
-
-//   throw new Error('Failed to retry with new access token.');
-// };
-
-// // Add request interceptor to attach the access token
-// newAxios.interceptors.request.use(
-//   (config:any) => {
-//     const token = getAccessToken();
-//     if (token) {
-//       config.headers = {
-//         ...config.headers,
-//         Authorization: `Bearer ${token}`,
-//       };
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error)
-// );
-
-// // Add response interceptor to handle responses and errors
-// newAxios.interceptors.response.use(handleResponse, handleError);
-
-// const storeTokens = (accessToken: string, refreshToken: string): void => {
-//   if (typeof window !== 'undefined') {
-//     localStorage.setItem('accessToken', accessToken);
-//     localStorage.setItem('refreshToken', refreshToken);
-//   }
-// };
-
-// const clearClientStorage = (): void => {
-//   if (typeof window !== 'undefined') {
-//     localStorage.clear();
-//   }
-// };
-
-// const redirectToHomePage = (): void => {
-//   if (typeof window !== 'undefined') {
-//     window.location.href = '/';
-//   }
-// };
-
-
-// // Helper functions for token management
+// Helper functions for token management
 const getAccessToken = () => {
     if (typeof window !== 'undefined') {
       const accessToken = localStorage.getItem('accessToken');
@@ -108,16 +13,6 @@ const getAccessToken = () => {
     }
     return null;
   };
-
-  const getRefreshToken = (): string | null => {
-    if (typeof window !== 'undefined') {
-        const refreshToken = localStorage.getItem('refreshToken');
-        if (refreshToken) {
-          return refreshToken;
-        }
-      }
-  return null;
-};
 
 const newAxios = axios.create({
     baseURL: "https://ededun-recorder-backend.onrender.com/api/v1"
@@ -232,6 +127,3 @@ export const saveRecording = async (
   
     return data as AxiosResponse;
   };
-
-
-// export default newAxios;
