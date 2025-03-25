@@ -14,7 +14,7 @@ const RegisterAuth: React.FC = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [gender, setGender] = useState<"male" | "female" | "">("");
   const [ageGroup, setAgeGroup] = useState<"child" | "teenager" | "adult" | "">("");
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const RegisterAuth: React.FC = () => {
   const [error, setError] = useState({
     firstNameError: false,
     lastNameError: false,
-    phoneNumberError: false,
+    phoneError: false,
     emailError: false,
     passwordError: false,
     genderError: false,
@@ -42,8 +42,8 @@ const RegisterAuth: React.FC = () => {
       setError({ ...error, lastNameError: true });
       return false;
     }
-    if (!phoneNumber) {
-      setError({ ...error, phoneNumberError: true });
+    if (!phone) {
+      setError({ ...error, phoneError: true });
       return false;
     }
     if (!email) {
@@ -77,20 +77,30 @@ const RegisterAuth: React.FC = () => {
     setError({
       firstNameError: false,
       lastNameError: false,
-      phoneNumberError: false,
+      phoneError: false,
       emailError: false,
       passwordError: false,
       genderError: false,
       ageGroupError: false,
     });
 
+    console.log(email,
+      password,
+      firstName,
+      lastName,
+      phone,
+      gender,
+      ageGroup,
+      loading,
+      showPassword
+    )
     try {
       const response = await registerUser({
         email,
         password,
         firstName,
         lastName,
-        phoneNumber,
+        phone,
         gender,
         ageGroup,
       });
@@ -153,14 +163,14 @@ const RegisterAuth: React.FC = () => {
             Phone Number
           </label>
           <PhoneInputCustom
-            value={phoneNumber}
+            value={phone}
             onChangePhoneNumber={(fullPhoneNumber: string) => {
-              setPhoneNumber(fullPhoneNumber);
-              setError({ ...error, phoneNumberError: false });
+              setPhone(fullPhoneNumber);
+              setError({ ...error, phoneError: false });
             }}
             placeholder="Input your phone number"
             initialCountryCode="US"
-            error={error.phoneNumberError}
+            error={error.phoneError}
             errorMessage="Phone Number is required"
           />
         </div>
