@@ -6,7 +6,7 @@ import Button from "./Button";
 import NormalInputField from "./NormalInputField";
 import { LoadingIcon } from "../constants/svgPath";
 import PhoneInputCustom from "./PhoneNumberInput";
-import { registerUser } from "@/axiosFolder/configurations/axiosLinkToBackend";
+import { registerUser } from "@/axiosFolder/axiosFunctions/axiosLinkToBackend";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const RegisterAuth: React.FC = () => {

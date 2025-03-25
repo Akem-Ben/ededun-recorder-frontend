@@ -11,7 +11,7 @@ import { useAlert, Alerts } from "next-alert";
 import {
   deleteARecording,
   getRecordings,
-} from "@/axiosFolder/configurations/axiosLinkToBackend";
+} from "@/axiosFolder/axiosFunctions/axiosLinkToBackend";
 
 interface Phrase {
   id: number;

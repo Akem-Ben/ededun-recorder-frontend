@@ -17,7 +17,7 @@ const Phrases: NextPage = () => {
         <title>Record Phrases | Èdèdún APYP</title>
         <meta name="description" content="Record voice phrases for speech data collection" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <Navbar />
       {activeView === "Phrases" &&  <PhrasesSection setActiveView={setActiveView} activeView={activeView}/>}

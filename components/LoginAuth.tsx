@@ -5,7 +5,7 @@ import { useAlert, Alerts } from "next-alert";
 import Button from "./Button";
 import NormalInputField from "./NormalInputField";
 import { LoadingIcon } from "../constants/svgPath";
-import { loginUser } from "@/axiosFolder/configurations/axiosLinkToBackend";
+import { loginUser } from "@/axiosFolder/axiosFunctions/axiosLinkToBackend";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const LoginAuth: React.FC = () => {

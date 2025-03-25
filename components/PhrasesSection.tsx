@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // components/PhrasesSection.tsx
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AudioRecorder from "./AudioRecorder";
 import Button from "./Button";
-import { getUnrecordedPhrases } from "@/axiosFolder/configurations/axiosLinkToBackend";
+import { getUnrecordedPhrases } from "@/axiosFolder/axiosFunctions/axiosLinkToBackend";
 import SkeletonLoader from "./SkeletonLoader";
 import { usePhrases } from "@/contexts/PhraseContexts";
 import { useAlert, Alerts } from "next-alert";
@@ -88,17 +88,33 @@ const PhrasesSection: React.FC<any> = ({
     setRecordedCount((prev) => prev + 1);
   };
 
-  const handleNextPage = () => {
+  // const handleNextPage = () => {
+  //   if (pageNumber < totalPages) {
+  //     setPageNumber((prev) => prev + 1);
+  //   }
+  //   setIsRecordingLoading(false)
+  // };
+
+  // const handlePreviousPage = () => {
+  //   if (pageNumber > 1) {
+  //     setPageNumber((prev) => prev - 1);
+  //   }
+  //   setIsRecordingLoading(false)
+  // };
+
+  const handleNextPage = useCallback(() => {
     if (pageNumber < totalPages) {
       setPageNumber((prev) => prev + 1);
     }
-  };
-
-  const handlePreviousPage = () => {
+    setIsRecordingLoading(false);
+  }, [pageNumber, totalPages]);
+  
+  const handlePreviousPage = useCallback(() => {
     if (pageNumber > 1) {
       setPageNumber((prev) => prev - 1);
     }
-  };
+    setIsRecordingLoading(false);
+  }, [pageNumber]);
 
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState<number | null>(
     null
@@ -108,11 +124,25 @@ const PhrasesSection: React.FC<any> = ({
     return setCurrentPhraseIndex(null);
   };
 
-  const progress =
-    initialPhraseCount === 0 || Number.isNaN(initialPhraseCount)
+  
+  // const progress =
+  //   initialPhraseCount === 0 || Number.isNaN(initialPhraseCount)
+  //     ? 0
+  //     : (recordedCount / initialPhraseCount) * 100;
+
+  const progress = useMemo(() => {
+    return initialPhraseCount === 0 || Number.isNaN(initialPhraseCount)
       ? 0
       : (recordedCount / initialPhraseCount) * 100;
+  }, [initialPhraseCount, recordedCount]);
 
+
+  useEffect(() => {
+    if (progress === 100) {
+      setIsRecordingLoading(false);
+    }
+  }, [progress]);
+  
   return (
     <div className="min-h-screen bg-[#e3effc] py-4 sm:py-8">
       <div className="max-w-4xl mx-auto px-2 sm:px-4">
@@ -269,7 +299,7 @@ const PhrasesSection: React.FC<any> = ({
                           <motion.button
                             key="start-recording"
                             onClick={() => setCurrentPhraseIndex(index)}
-                            className={`flex items-center font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto ${
+                            className={`flex items-center font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto ${
                               isRecordingLoading
                                 ? "bg-[#A0C4F3] cursor-not-allowed"
                                 : "bg-[#1671D9]"
