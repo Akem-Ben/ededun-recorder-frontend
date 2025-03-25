@@ -295,14 +295,14 @@ useEffect(() => {
     } catch (error) {
       console.error("Error saving recording:", error);
     } finally {
-      setIsLoading(false);
-
-      // await getUnrecordedPhrases(1)
       setTimeout(() => {
         if (onClose) {
           onClose();
         }
-      }, 500);
+      }, 1000);
+      setIsLoading(false);
+
+      // await getUnrecordedPhrases(1)
     }
   };
 

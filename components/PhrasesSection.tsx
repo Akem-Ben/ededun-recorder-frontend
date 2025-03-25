@@ -81,11 +81,15 @@ const PhrasesSection: React.FC<any> = ({
   }, [pageNumber, fetchPhrases]);
 
   const handleRecordingComplete = (phraseId: any) => {
+    setPhrasesLoading(true)
     setUnrecordedPhrases((prevPhrases: any[]) =>
       prevPhrases.filter((phrase) => phrase.id !== phraseId)
     );
 
     setRecordedCount((prev) => prev + 1);
+    setTimeout(()=> {
+      setPhrasesLoading(false)
+    }, 500)
   };
 
   // const handleNextPage = () => {
@@ -142,7 +146,7 @@ const PhrasesSection: React.FC<any> = ({
       setIsRecordingLoading(false);
     }
   }, [progress]);
-  
+
   return (
     <div className="min-h-screen bg-[#e3effc] py-4 sm:py-8">
       <div className="max-w-4xl mx-auto px-2 sm:px-4">
@@ -286,13 +290,13 @@ const PhrasesSection: React.FC<any> = ({
                               }`}
                             >
                               <span className="font-[700] text-base sm:text-[16px]">
-                                {phrase.yoruba_text} ({phrase.english_text})
+                                {phrase?.yoruba_text ? phrase?.yoruba_text : ""} ({phrase?.english_text ? phrase?.english_text : ""})
                               </span>
                               <br />
                               {/* <span className="text-[#008764D9] text-sm font-[400]">{phrase.english_text}</span> */}
                               {/* <br /> */}
                               <span className="text-[#CE2C31] text-sm italic font-[500]">
-                                {phrase.pronounciation_note}
+                                {phrase?.pronounciation_note ? phrase?.pronounciation_note : ""}
                               </span>
                             </span>
                           </div>
