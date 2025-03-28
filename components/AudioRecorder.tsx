@@ -118,9 +118,73 @@ useEffect(() => {
     }
   }, [isLoading, onLoadingChange]);
 
-  const startRecording = async () => {
+  async function requestMicrophonePermission() {
     try {
+      // Request microphone access
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      
+      // Permission granted - you can now use the microphone
+      console.log("Microphone access granted");
+      
+      // Important: stop the tracks immediately if you just needed permission
+      stream.getTracks().forEach(track => track.stop());
+      
+      return true;
+    } catch (error) {
+      // Permission denied or error occurred
+      console.error("Error accessing microphone:", error);
+      return false;
+    }
+  }
+
+  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+
+  const checkMicrophonePermission = async () => {
+    try {
+      // Check if the browser supports the Permissions API
+      if (navigator.permissions) {
+        const permissionStatus = await navigator.permissions.query({
+          name: 'microphone' as any // TypeScript workaround
+        });
+        
+        setHasPermission(permissionStatus.state === 'granted');
+        
+        permissionStatus.onchange = () => {
+          setHasPermission(permissionStatus.state === 'granted');
+        };
+      } else {
+        // Fallback for browsers without Permissions API
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach(track => track.stop());
+        setHasPermission(true);
+      }
+    } catch (error) {
+      setHasPermission(false);
+    }
+  };
+  
+  // Call this in useEffect when component mounts
+  useEffect(() => {
+    checkMicrophonePermission();
+  }, []);
+
+  const startRecording = async () => {
+
+    if (hasPermission === false) {
+      addAlert('Error', 'Microphone access was previously denied. Please enable it in your browser settings.', 'error');
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          sampleRate: 44100
+        } 
+      });
+
+      setHasPermission(true);
+
       mediaRecorderRef.current = new MediaRecorder(stream);
       audioChunksRef.current = [];
 
@@ -148,8 +212,25 @@ useEffect(() => {
         }
       }, 30000);
     } catch (error) {
-      console.error("Error starting recording:", error);
+    setHasPermission(false);
+    
+    let errorMessage = "Error accessing microphone";
+    if (error instanceof DOMException) {
+      switch (error.name) {
+        case 'NotAllowedError':
+          errorMessage = "Microphone access was denied";
+          break;
+        case 'NotFoundError':
+          errorMessage = "No microphone found";
+          break;
+        case 'NotReadableError':
+          errorMessage = "Microphone is already in use";
+          break;
+      }
     }
+    
+    addAlert('Error', errorMessage, 'error');
+  }
   };
 
   const stopRecording = () => {
