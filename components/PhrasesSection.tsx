@@ -51,6 +51,7 @@ const PhrasesSection: React.FC<any> = ({
 
   useEffect(() => {
     async function getData() {
+
       setPhrasesLoading(true);
 
       const response: any = await getUnrecordedPhrases(pageNumber);
@@ -60,7 +61,16 @@ const PhrasesSection: React.FC<any> = ({
       }
 
       if (response.data.data.data) {
-        setUnrecordedPhrases(response.data.data.data);
+
+        const validatedPhrases = response.data.data.data.map((phrase: any) => ({
+          id: phrase.id,
+          yoruba_text: phrase.yoruba_text || '',
+          english_text: phrase.english_text || '',
+          pronounciation_note: phrase.pronounciation_note || '',
+          recorded: phrase.recorded || false
+        }));
+
+        setUnrecordedPhrases(validatedPhrases);
 
         setTotalPages(response.data.data.totalPages);
 
@@ -80,16 +90,23 @@ const PhrasesSection: React.FC<any> = ({
     getData();
   }, [pageNumber, fetchPhrases]);
 
-  const handleRecordingComplete = (phraseId: any) => {
-    setPhrasesLoading(true)
-    setUnrecordedPhrases((prevPhrases: any[]) =>
-      prevPhrases.filter((phrase) => phrase.id !== phraseId)
-    );
 
-    setRecordedCount((prev) => prev + 1);
-    setTimeout(()=> {
-      setPhrasesLoading(false)
-    }, 500)
+  const handleRecordingComplete = (phraseId: any) => {
+    setPhrasesLoading(true);
+    
+    setUnrecordedPhrases((prevPhrases:any) => {
+
+      const newPhrases = prevPhrases.filter((phrase:any) => phrase.id !== phraseId);
+      return newPhrases;
+    });
+  
+    setRecordedCount(prev => prev + 1);
+  
+    const loadingTimer = setTimeout(() => {
+      setPhrasesLoading(false);
+    }, 500);
+  
+    return () => clearTimeout(loadingTimer);
   };
 
   // const handleNextPage = () => {
@@ -162,14 +179,16 @@ const PhrasesSection: React.FC<any> = ({
 
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2 sm:gap-4">
           <section className="flex flex-col sm:flex-row gap-2 sm:gap-10">
-            <div className="text-sm sm:text-base bg-[#4A90E2] px-2 py-1 sm:px-2 rounded-2xl font-semibold text-white leading-normal sm:leading-[57px] text-center">
+          <div className="bg-[#4A90E2] p-2 flex justify-center items-center rounded-xl">
+            <button disabled className="text-sm sm:text-base px-2 py-1 sm:px-2 rounded-2xl font-semibold text-white leading-normal sm:leading-[57px] text-center">
               Phrases To Record
+            </button>
             </div>
-            <div
-              onClick={() => setActiveView("Recordings")}
-              className="text-sm sm:text-base hover:cursor-pointer hover:scale-105 transition-transform duration-200 bg-gray-300 px-2 py-1 sm:px-2 rounded-2xl font-semibold text-[#001C4C] leading-normal sm:leading-[57px] text-center"
-            >
+            <div onClick={() => setActiveView("Recordings")} className="bg-gray-300 flex justify-center items-center p-2 rounded-xl">
+            <button
+              className="text-sm sm:text-base hover:cursor-pointer hover:scale-105 transition-transform duration-200 px-2 py-1 sm:px-2 rounded-2xl font-semibold text-[#001C4C] leading-normal sm:leading-[57px] text-center">
               My Recordings
+            </button>
             </div>
           </section>
 
@@ -228,7 +247,7 @@ const PhrasesSection: React.FC<any> = ({
             ) : progress === 100 ? (
               <CompletionState />
             ) : (
-              <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
+              <div className="space-y-2 max-h-120 sm:max-h-80 md:max-h-80 lg:max-h-120 overflow-y-auto pr-2">
                 {unrecordedPhrases.length === 0 ? (
                   <EmptyState
                     title="No phrases new phrases uploaded"
@@ -290,21 +309,21 @@ const PhrasesSection: React.FC<any> = ({
                               }`}
                             >
                               <span className="font-[700] text-base sm:text-[16px]">
-                                {phrase?.yoruba_text ? phrase?.yoruba_text : ""} ({phrase?.english_text ? phrase?.english_text : ""})
+                              {phrase?.yoruba_text || "Yoruba text not available, loading..."}  ({phrase?.english_text || "English text not available"})
                               </span>
                               <br />
                               {/* <span className="text-[#008764D9] text-sm font-[400]">{phrase.english_text}</span> */}
                               {/* <br /> */}
                               <span className="text-[#CE2C31] text-sm italic font-[500]">
-                                {phrase?.pronounciation_note ? phrase?.pronounciation_note : ""}
+                              {phrase?.pronounciation_note || "No pronunciation note available"}
                               </span>
                             </span>
                           </div>
                           <motion.button
                             key="start-recording"
                             onClick={() => setCurrentPhraseIndex(index)}
-                            className={`flex items-center font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto ${
-                              isRecordingLoading
+                            className={`flex justify-center items-center font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto ${
+                              isRecordingLoading || currentPhraseIndex !== null
                                 ? "bg-[#A0C4F3] cursor-not-allowed"
                                 : "bg-[#1671D9]"
                             }`}
@@ -313,7 +332,7 @@ const PhrasesSection: React.FC<any> = ({
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            disabled={isRecordingLoading}
+                            disabled={isRecordingLoading || currentPhraseIndex !== null}
                             style={{ borderRadius: "8px" }}
                           >
                             <div className="flex items-center gap-[5px] sm:gap-[10px]">
@@ -353,7 +372,7 @@ const PhrasesSection: React.FC<any> = ({
             <div className="p-4 sm:p-6 flex flex-col sm:flex-row justify-between gap-2 sm:gap-0">
               <div>
                 <motion.button
-                  className="flex bg-[#0F973D] px-3 py-2 sm:px-3 sm:py-3 items-center gap-2 transition-colors w-full sm:w-auto"
+                  className="flex bg-[#0F973D] px-3 py-2 justify-center sm:px-3 sm:py-3 items-center gap-2 transition-colors w-full sm:w-auto"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0 }}
@@ -361,6 +380,7 @@ const PhrasesSection: React.FC<any> = ({
                   exit={{ opacity: 0 }}
                   disabled={pageNumber === 1}
                   onClick={handlePreviousPage}
+                  style={{borderRadius: '12px'}}
                 >
                   <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
                     <div>
@@ -385,7 +405,7 @@ const PhrasesSection: React.FC<any> = ({
               </div>
               <div>
                 <motion.button
-                  className="flex bg-[#0F973D] px-3 py-2 sm:px-3 sm:py-3 items-center gap-2 transition-colors w-full sm:w-auto"
+                  className="flex bg-[#0F973D] px-3 py-2 justify-center sm:px-3 sm:py-3 items-center gap-2 transition-colors w-full sm:w-auto"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0 }}
@@ -393,6 +413,7 @@ const PhrasesSection: React.FC<any> = ({
                   exit={{ opacity: 0 }}
                   onClick={handleNextPage}
                   disabled={pageNumber === totalPages}
+                  style={{borderRadius: '12px'}}
                 >
                   <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
                     <div>

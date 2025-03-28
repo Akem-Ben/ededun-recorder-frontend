@@ -133,7 +133,7 @@ const Home: NextPage = () => {
 
         {/* Footer */}
         <footer className="text-emerald-200/70 text-sm animate__animated animate__fadeIn animate__delay-5s">
-          <div className="border-t border-emerald-700/30 pt-4 flex flex-col sm:flex-row justify-between items-center">
+          <div className="border-t border-emerald-700/30 pt-4 flex flex-col sm:flex-row justify-between items-center container mx-auto px-4 max-w-4xl">
             <p>© 2025 Èdèdún AI Project</p>
             <div className="flex gap-4 mt-2 sm:mt-0">
               <Link

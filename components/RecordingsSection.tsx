@@ -29,7 +29,7 @@ const Recordings: React.FC<any> = ({
 }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const { fetchUserRecordings } = usePhrases();
-  const [totalPages, setTotalPages] = useState(1);
+  // const [totalPages, setTotalPages] = useState(1);
   const [recordings, setRecordings] = useState<any>([]);
   const [recordingToDelete, setRecordingToDelete] = useState<string | null>(
     null
@@ -57,7 +57,7 @@ const Recordings: React.FC<any> = ({
       if (response.data.data.data) {
         console.log(response.data.data);
         setRecordings(response.data.data.data);
-        setTotalPages(response.data.data.totalPages);
+        // setTotalPages(response.data.data.totalPages);
       } else {
         setRecordings([]);
       }
@@ -68,17 +68,17 @@ const Recordings: React.FC<any> = ({
     getData();
   }, [pageNumber, fetchUserRecordings]);
 
-  const handleNextPage = () => {
-    if (pageNumber < totalPages) {
-      setPageNumber((prev) => prev + 1);
-    }
-  };
+  // const handleNextPage = () => {
+  //   if (pageNumber < totalPages) {
+  //     setPageNumber((prev) => prev + 1);
+  //   }
+  // };
 
-  const handlePreviousPage = () => {
-    if (pageNumber > 1) {
-      setPageNumber((prev) => prev - 1);
-    }
-  };
+  // const handlePreviousPage = () => {
+  //   if (pageNumber > 1) {
+  //     setPageNumber((prev) => prev - 1);
+  //   }
+  // };
 
   const handlePlayStop = (recordingUrl: string) => {
     if (currentlyPlaying === recordingUrl) {
@@ -141,14 +141,17 @@ const Recordings: React.FC<any> = ({
         </div>
 
         <section className="flex flex-col sm:flex-row gap-2 sm:gap-10 justify-center mb-4">
-          <div
-            onClick={() => setActiveView("Phrases")}
+            <div onClick={() => setActiveView("Phrases")} className="bg-gray-300 flex justify-center items-center p-2 rounded-xl">
+          <button
             className="text-sm sm:text-base hover:cursor-pointer hover:scale-105 transition-transform duration-200 bg-gray-300 px-2 py-1 sm:px-2 rounded-2xl font-semibold text-[#001C4C] leading-normal sm:leading-[57px] text-center"
           >
             Phrases To Record
-          </div>
-          <div className="text-sm sm:text-base bg-[#4A90E2] px-2 py-1 sm:px-2 rounded-2xl font-semibold text-white leading-normal sm:leading-[57px] text-center">
+          </button>
+             </div>       
+        <div className="bg-[#4A90E2] flex justify-center items-center p-2 rounded-xl">
+          <button disabled className="text-sm sm:text-base sm:px-2 font-semibold text-white leading-normal sm:leading-[57px] text-center">
             My Recordings
+          </button>
           </div>
         </section>
 
@@ -191,7 +194,7 @@ const Recordings: React.FC<any> = ({
                 </motion.div>
               ))
             ) : (
-              <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
+              <div className="space-y-2 max-h-120 overflow-y-auto pr-2">
                 {recordings.length === 0 ? (
                   <EmptyState
                     title="No Recordings Found"
@@ -371,7 +374,7 @@ const Recordings: React.FC<any> = ({
             )}
           </div>
 
-          {totalPages > 1 && (
+          {/* {totalPages > 1 && (
             <div className="p-4 sm:p-6 flex flex-row sm:flex-col justify-between gap-2 sm:gap-0">
               <div>
                 <motion.button
@@ -440,7 +443,7 @@ const Recordings: React.FC<any> = ({
                 </motion.button>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 
