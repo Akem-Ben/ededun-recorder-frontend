@@ -152,20 +152,6 @@ useEffect(() => {
     }
   };
 
-  const pauseRecording = () => {
-    if (mediaRecorderRef.current && recordingState === "recording") {
-      mediaRecorderRef.current.pause();
-      setRecordingState("paused");
-    }
-  };
-
-  const resumeRecording = () => {
-    if (mediaRecorderRef.current && recordingState === "paused") {
-      mediaRecorderRef.current.resume();
-      setRecordingState("recording");
-    }
-  };
-
   const stopRecording = () => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
@@ -228,23 +214,19 @@ useEffect(() => {
         .forEach((track) => track.stop());
     }
 
-    // Stop any playing audio
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.src = "";
     }
 
-    // Cancel any animation frame
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
     }
 
-    // Clear the audio URL if it exists
     if (audioURL) {
       URL.revokeObjectURL(audioURL);
     }
 
-    // Reset all states
     setRecordingState("idle");
     setAudioURL(null);
     setDuration(0);
@@ -252,17 +234,20 @@ useEffect(() => {
     setIsPlaying(false);
     setIsLoading(false);
 
-    // Clear audio chunks
     audioChunksRef.current = [];
 
-    // Call the onClose prop if provided
     if (onClose) {
       onClose();
     }
   };
 
   const handleSave = async () => {
-    if (!audioURL) return;
+
+    if (!audioURL || !phrase?.id || !phrase?.yoruba_text) {
+      addAlert('Error', 'Missing required phrase data', 'error');
+      setIsLoading(false)
+      return;
+    }
 
     setIsLoading(true);
 
@@ -441,13 +426,13 @@ const formattedDuration = useMemo(() => formatTime(duration), [duration]);
               <motion.button
                 key="start-recording"
                 onClick={startRecording}
-                className="flex items-center bg-[#1671D9] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                className="flex items-center justify-center bg-[#1671D9] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                disabled={isLoading}
+                disabled={isLoading || isPlaying}
                 style={{ borderRadius: "8px" }}
               >
                 <div className="flex items-center gap-[10px] justify-center">
@@ -512,8 +497,8 @@ const formattedDuration = useMemo(() => formatTime(duration), [duration]);
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    disabled={isLoading}
-                    className="flex items-center bg-[#FFF] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                    disabled={isLoading || isPlaying || !audioURL}
+                    className="flex items-center justify-center bg-[#FFF] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
                     style={{ borderRadius: "8px", border: "1px solid black" }}
                   >
                     <div className="flex text-[#101928] items-center gap-[10px] justify-center">
@@ -543,8 +528,8 @@ const formattedDuration = useMemo(() => formatTime(duration), [duration]);
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    disabled={isLoading}
-                    className="flex items-center bg-[#FFF] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                    disabled={isLoading || isPlaying || !audioURL}
+                    className="flex items-center justify-center bg-[#FFF] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
                     style={{ borderRadius: "8px", border: "1px solid black" }}
                   >
                     <div className="flex text-[#101928] items-center gap-[10px] justify-center">
@@ -584,8 +569,8 @@ const formattedDuration = useMemo(() => formatTime(duration), [duration]);
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  disabled={isLoading}
-                  className="flex items-center bg-[#CE2C31] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                  disabled={isLoading || isPlaying || !audioURL}
+                  className="flex items-center justify-center bg-[#CE2C31] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
                   style={{ borderRadius: "8px" }}
                 >
                   <div className="flex text-[#FFF] items-center gap-[10px] justify-center">
@@ -626,8 +611,8 @@ const formattedDuration = useMemo(() => formatTime(duration), [duration]);
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  disabled={isLoading}
-                  className="flex items-center gap-2 bg-[#0F973D] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                  disabled={isLoading || isPlaying || !audioURL}
+                  className="flex items-center justify-center gap-2 bg-[#0F973D] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
                   style={{ borderRadius: "8px" }}
                 >
                   {isLoading ? (
