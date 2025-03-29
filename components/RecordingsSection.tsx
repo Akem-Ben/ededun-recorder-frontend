@@ -42,14 +42,12 @@ const Recordings: React.FC<any> = ({
   const [currentTime, setCurrentTime] = useState(0); // Track current playback time
   const [duration, setDuration] = useState(0); // Track total duration of the audio
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null); // Track the currently playing audio URL
-  const [totalPhrases, setTotalPhrases] = useState<number | null>(null);
+  // const [totalPhrases, setTotalPhrases] = useState<number | null>(null);
 
   useEffect(() => {
     async function getData() {
       setPhrasesLoading(true);
       const response: any = await getRecordings(pageNumber);
-
-      console.log("res", response);
 
       if (response.status !== 200) {
         setRecordings([]);
@@ -57,8 +55,8 @@ const Recordings: React.FC<any> = ({
 
       if (response.data.data.data) {
         console.log(response.data.data);
-        setRecordings(response.data.data.data.recordingsWithPhrases);
-        setTotalPhrases(response.data.data.data.length);
+        setRecordings(response.data.data.data);
+        // setTotalPhrases(response.data.data.data.length);
       } else {
         setRecordings([]);
       }
@@ -156,7 +154,7 @@ const Recordings: React.FC<any> = ({
           </div>
           {Array.isArray(recordings) && recordings.length > 0 && (
             <div className="flex text-[#CE2C31] font-[600] justify-center items-center">
-              {recordings.length}/{totalPhrases} {recordings.length === 1 ? "phrase recorded" : "phrases recorded"}
+              {recordings.length} {recordings.length === 1 ? "phrase recorded" : "phrases recorded"}
             </div>
           )}
         </section>
