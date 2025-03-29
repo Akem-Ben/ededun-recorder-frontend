@@ -249,10 +249,7 @@ const PhrasesSection: React.FC<any> = ({
             ) : (
               <div className="space-y-2 max-h-120 sm:max-h-80 md:max-h-80 lg:max-h-120 overflow-y-auto pr-2">
                 {unrecordedPhrases.length === 0 ? (
-                  <EmptyState
-                    title="No phrases new phrases uploaded"
-                    description="No new phrases yet"
-                  />
+                  <CompletionState />
                 ) : (
                   unrecordedPhrases.map((phrase: any, index: any) => (
                     <motion.div
