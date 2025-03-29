@@ -441,13 +441,13 @@ const PhrasesSection: React.FC<any> = ({
         </div>
 
         {currentPhraseIndex !== null && unrecordedPhrases.length > 0 && (
-          <AnimatePresence mode="wait">
+          // <AnimatePresence mode="wait">
             <motion.div
               key={`phrase-${currentPhraseIndex}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
+              // initial={{ opacity: 0, y: 20 }}
+              // animate={{ opacity: 1, y: 0 }}
+              // exit={{ opacity: 0, y: -20 }}
+              // transition={{ duration: 0.3 }}
             >
               <AudioRecorder
                 phrase={unrecordedPhrases[currentPhraseIndex]}
@@ -461,7 +461,7 @@ const PhrasesSection: React.FC<any> = ({
                 onLoadingChange={handleLoadingChange}
               />
             </motion.div>
-          </AnimatePresence>
+          //* </AnimatePresence> */}
         )}
       </div>
       <Alerts

@@ -67,7 +67,7 @@ export const loginUser = async (body: any): Promise<AxiosResponse> => {
 
 export const saveRecording = async (
   body: FormData,
-): Promise<{ data: AxiosResponse | null; error: AxiosError | null }> => {
+): Promise<{ data: AxiosResponse | null | any; error: AxiosError | null }> => {
   const accessToken = getAccessToken();
 
   const { data, error } = await withErrorHandling(async () => {
