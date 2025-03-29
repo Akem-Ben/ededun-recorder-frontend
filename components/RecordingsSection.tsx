@@ -141,22 +141,22 @@ const Recordings: React.FC<any> = ({
         </div>
 
         <section className="flex flex-col sm:flex-row gap-2 sm:gap-10 justify-center mb-4">
-            <div onClick={() => setActiveView("Phrases")} className="bg-gray-300 flex justify-center items-center p-2 rounded-xl">
-          <button
-            className="text-sm sm:text-base hover:cursor-pointer hover:scale-105 transition-transform duration-200 bg-gray-300 px-2 py-1 sm:px-2 rounded-2xl font-semibold text-[#001C4C] leading-normal sm:leading-[57px] text-center"
-          >
-            Phrases To Record
-          </button>
-             </div>       
-        <div className="bg-[#4A90E2] flex justify-center items-center p-2 rounded-xl">
-          <button disabled className="text-sm sm:text-base sm:px-2 font-semibold text-white leading-normal sm:leading-[57px] text-center">
-            My Recordings
-          </button>
+          <div onClick={() => setActiveView("Phrases")} className="bg-gray-300 flex justify-center items-center p-2 rounded-xl">
+            <button
+              className="text-sm sm:text-base hover:cursor-pointer hover:scale-105 transition-transform duration-200 bg-gray-300 px-2 py-1 sm:px-2 rounded-2xl font-semibold text-[#001C4C] leading-normal sm:leading-[57px] text-center"
+            >
+              Phrases To Record
+            </button>
           </div>
-          {recordings.length &&(
-          <div className="flex text-[#CE2C31] font-[600] justify-center items-center">
-            {recordings.length} {recordings.length > 1 || recordings.length < 1 ? "phrases recorded" : "phrase recorded"}
+          <div className="bg-[#4A90E2] flex justify-center items-center p-2 rounded-xl">
+            <button disabled className="text-sm sm:text-base sm:px-2 font-semibold text-white leading-normal sm:leading-[57px] text-center">
+              My Recordings
+            </button>
           </div>
+          {Array.isArray(recordings) && recordings.length > 0 && (
+            <div className="flex text-[#CE2C31] font-[600] justify-center items-center">
+              {recordings.length} {recordings.length === 1 ? "phrase recorded" : "phrases recorded"}
+            </div>
           )}
         </section>
 
@@ -276,7 +276,7 @@ const Recordings: React.FC<any> = ({
                                 <div className="flex text-[#101928] items-center gap-[5px] sm:gap-[10px]">
                                   <div>
                                     {currentlyPlaying ===
-                                    recording.recording_url ? (
+                                      recording.recording_url ? (
                                       <svg
                                         width="20"
                                         height="21"
@@ -306,7 +306,7 @@ const Recordings: React.FC<any> = ({
                                   </div>
                                   <div className="text-sm sm:text-base">
                                     {currentlyPlaying ===
-                                    recording.recording_url
+                                      recording.recording_url
                                       ? "Stop"
                                       : "Play"}
                                   </div>
