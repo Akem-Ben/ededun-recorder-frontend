@@ -144,10 +144,6 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
   }, []);
 
   const startRecording = async () => {
-    if (hasPermission === false) {
-      addAlert('Error', 'Microphone access was previously denied. Please enable it in your browser settings.', 'error');
-      return;
-    }
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ 
@@ -198,13 +194,12 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         clearTimeout(timeoutId);
       };
     } catch (error) {
-      setHasPermission(false);
-      
       let errorMessage = "Error accessing microphone";
       if (error instanceof DOMException) {
         switch (error.name) {
           case 'NotAllowedError':
-            errorMessage = "Microphone access was denied";
+            errorMessage = "Microphone access was denied. Please enable it in your browser settings.";
+            setHasPermission(false);
             break;
           case 'NotFoundError':
             errorMessage = "No microphone found";
@@ -212,6 +207,8 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
           case 'NotReadableError':
             errorMessage = "Microphone is already in use";
             break;
+          default:
+            errorMessage = "Could not access microphone";
         }
       }
       
