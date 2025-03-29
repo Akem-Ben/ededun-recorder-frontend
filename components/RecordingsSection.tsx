@@ -153,6 +153,11 @@ const Recordings: React.FC<any> = ({
             My Recordings
           </button>
           </div>
+          {recordings.length &&(
+          <div className="flex text-[#CE2C31] font-[600] justify-center items-center">
+            {recordings.length} {recordings.length > 1 || recordings.length < 1 ? "phrases recorded" : "phrase recorded"}
+          </div>
+          )}
         </section>
 
         <div className="rounded-lg bg-white shadow-md mb-4">
@@ -262,7 +267,7 @@ const Recordings: React.FC<any> = ({
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="flex items-center gap-2 bg-[#FFF] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                                className="flex items-center gap-2 bg-[#FFF] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
                                 style={{
                                   borderRadius: "8px",
                                   border: "1px solid black",
@@ -319,7 +324,7 @@ const Recordings: React.FC<any> = ({
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 disabled={trackRecording}
-                                className="flex items-center gap-2 bg-[#CE2C31] font-[700] w-full sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
+                                className="flex items-center gap-2 bg-[#CE2C31] font-[700] sm:auto text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto"
                                 style={{ borderRadius: "8px" }}
                               >
                                 <div className="flex text-[#FFF] items-center gap-[5px] sm:gap-[10px]">
