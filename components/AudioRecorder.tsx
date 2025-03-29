@@ -526,7 +526,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
                 <motion.button
                   key="stop-recording"
                   onClick={stopRecording}
-                  className="flex items-center bg-[#CE2C31] font-[700] text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto disabled:opacity-50"
+                  className="flex items-center justify-center bg-[#CE2C31] font-[700] text-white text-base h-[48px] px-6 py-[12px] transition-colors w-full sm:w-auto disabled:opacity-50"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0 }}
