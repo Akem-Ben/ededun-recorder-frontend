@@ -15,7 +15,10 @@ const getAccessToken = () => {
   };
 
 const newAxios = axios.create({
-    baseURL: "https://ededun-recorder-backend.onrender.com/api/v1"
+    baseURL: 'https://zabbot-backend-development-no68m.ondigitalocean.app/api/v1/ededun'
+    //Zabbot local ==> 'http://localhost:3010/api/v1/ededun'
+    //Digital Ocean: ==> 'https://zabbot-backend-development-no68m.ondigitalocean.app/api/v1/ededun'
+    // "https://ededun-recorder-backend.onrender.com/api/v1"
     // "https://ededun-recorder-backend.onrender.com/api/v1"
     // 'http://localhost:3050/api/v1'
 })
